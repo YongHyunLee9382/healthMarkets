@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="goods">
+	
+	<select id="selectOneGoods" parameterType="int" resultType="GoodsDTO">
+	    SELECT 
+	    		*
+	    FROM 
+	    		GOODS  
+        WHERE 
+        		PRODUCT_CD = #{productCd}
+	</select>
+	
+	<select id="selectListRelatedGoods" parameterType="GoodsDTO" resultType="GoodsDTO" >
+		SELECT 
+	   			*
+	    FROM 
+				GOODS
+		WHERE
+				SORT = #{sort} AND PRODUCT_CD != #{productCd}
+		ORDER BY
+				PRICE DESC
+		LIMIT	
+				4            		       
+	</select>
+	
+</mapper>

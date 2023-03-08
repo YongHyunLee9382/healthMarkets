@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    
+    <definition name="/admin/member/adminLogin" extends="default">
+       <put-attribute name="title" value="관리자 로그인" />
+       <put-attribute name="content" value="/WEB-INF/views/admin/member/adminLogin.jsp" />
+    </definition>
+    
+    <definition name="/admin/member/adminMain" extends="default">
+       <put-attribute name="title" value="관리자 메인" />
+       <put-attribute name="content" value="/WEB-INF/views/admin/member/adminMain.jsp" />
+    </definition>
+    
+    <definition name="/admin/member/adminMemberList" extends="default">
+       <put-attribute name="title" value="관리자 회원 관리" />
+       <put-attribute name="content" value="/WEB-INF/views/admin/member/adminMemberList.jsp" />
+    </definition>
+    
+</tiles-definitions>
+
+

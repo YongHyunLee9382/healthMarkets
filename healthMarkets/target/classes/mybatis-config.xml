@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">	
+
+<configuration>
+	
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+
+	 <typeAliases>
+	 	<typeAlias type="com.spring.healthMarkets.admin.member.dto.AdminDTO" alias="AdminDTO"/>
+	 	<typeAlias type="com.spring.healthMarkets.goods.dto.GoodsDTO" alias="GoodsDTO"/>
+	 	<typeAlias type="com.spring.healthMarkets.member.dto.MemberDTO" alias="MemberDTO"/>
+	 	<typeAlias type="com.spring.healthMarkets.contact.dto.ContactDTO"      alias="ContactDTO" />
+	 </typeAliases>
+	 
+	 
+</configuration>
+

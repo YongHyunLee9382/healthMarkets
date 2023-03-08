@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adminContact">
+
+	<select id="selectListContact" resultType="ContactDTO">
+		SELECT
+				*
+		FROM
+				CONTACT
+		ORDER BY
+				REG_DT DESC
+	</select>
+	
+	<select id="selectOneContact" parameterType="int" resultType="ContactDTO">
+		SELECT
+				*
+		FROM
+				CONTACT
+		WHERE
+				CONTACT_CD = #{contactCd}
+	</select>
+	
+	<delete id="deleteContact" >
+		DELETE FROM
+				CONTACT
+		WHERE
+				CONTACT_CD IN 
+		<foreach collection="array" item="contactCd" separator="," open="("  close=")" >
+				#{contactCd}
+		</foreach>
+	</delete>
+	
+	<select id="selectListDailyNewContact" resultType="ContactDTO">
+		SELECT
+				*
+		FROM
+				CONTACT
+		WHERE
+				LEFT(REG_DT , 10) = #{today}
+	</select>
+	
+	<update id="updateAdminReply" parameterType="ContactDTO">
+		UPDATE
+				CONTACT
+		SET
+				ADMIN_REPLY = #{adminReply}
+		WHERE
+				CONTACT_CD = #{contactCd}
+	
+	</update>
+	
+</mapper>

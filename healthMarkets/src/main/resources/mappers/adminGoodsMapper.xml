@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adminGoods">
+	
+	
+	<insert id="insertGoods" parameterType="GoodsDTO">
+		    INSERT INTO 
+		  			GOODS (
+						PRODUCT_NM,
+						PRICE,		
+						DISCOUNT_RT,
+						SORT,
+						POINT,
+						DELIVERY_PRICE,
+						PART,
+						PRODUCT_FILE_NAME,
+						INTRO,
+						ENROLL_DT		  			
+		  			)
+		    VALUES (
+			       #{productNm},
+			       #{price},
+			       #{discountRt},
+			       #{sort},
+			       #{point},
+			       #{deliveryPrice},
+			       #{part},
+			       #{productFileName},
+			       #{intro},
+			       NOW()
+ 			 )
+	</insert> 
+	
+	<select id="selectGoodsList" resultType="GoodsDTO">
+		SELECT
+				*
+		FROM
+				GOODS
+	</select>
+	
+	<delete id="deleteGoods" parameterType="int">
+		DELETE FROM GOODS WHERE PRODUCT_CD = #{productCd}
+	</delete>	
+	
+	
+	<update id="updateGoods" parameterType="GoodsDTO" >
+	   UPDATE 
+	   			GOODS
+	   <set> 
+	      <if test='productNm != null and productNm != ""'>
+	        PRODUCT_NM = #{productNm},
+	      </if>
+	      <if test='price != null and price != ""'>
+	        PRICE = #{price},
+	      </if>
+	      <if test='discountRt != null and discountRt != ""'>
+	        DISCOUNT_RT = #{discountRt},
+	      </if>
+	      <if test='sort != null and sort != ""'>
+	        SORT = #{sort},
+	      </if>
+	      <if test='point != null and point != ""'>
+	        POINT = #{point},
+	      </if>
+	      <if test='deliveryPrice != null and deliveryPrice != ""'>
+	        DELIVERY_PRICE = #{deliveryPrice},
+	      </if>
+	      <if test='part != null and part != ""'>
+	        PART = #{part},
+	      </if>
+	      <if test='intro != null and intro != ""'>
+	        INTRO = #{intro},
+	      </if>
+	      <if test='productFileName != null and productFileName != ""'>
+	        PRODUCT_FILE_NAME = #{productFileName},
+	      </if>
+	    </set>
+		WHERE 
+				PRODUCT_CD = #{productCd}
+	</update>	
+		
+</mapper>

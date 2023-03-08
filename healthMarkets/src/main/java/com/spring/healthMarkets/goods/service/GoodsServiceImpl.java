@@ -1,0 +1,29 @@
+package com.spring.healthMarkets.goods.service;
+
+import java.util.List;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.healthMarkets.goods.dao.GoodsDAO;
+import com.spring.healthMarkets.goods.dto.GoodsDTO;
+
+
+
+@Service
+public class GoodsServiceImpl implements GoodsService {
+	@Autowired
+	private GoodsDAO goodsDAO;
+
+	@Override
+	public GoodsDTO getGoodsDetail(int productCd) throws Exception {
+		
+		return goodsDAO.selectOneGoods(productCd);
+	}
+
+	@Override
+	public List<GoodsDTO> getRelatedGoodsList(GoodsDTO goodsDTO) throws Exception {
+		return goodsDAO.selectRelatedGoodsList(goodsDTO);
+	}
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="contact">
+
+	<insert id="insertContact" parameterType="ContactDTO">
+		INSERT INTO CONTACT(
+				MEMBER_ID,
+				NAME,
+				EMAIL,
+				SUBJECT,
+				CONTENT,
+				REG_DT
+		)
+		VALUES (
+				#{memberId},
+				#{name},
+				#{email},
+				#{subject},
+				#{content},
+				NOW()
+		)
+	</insert>
+	
+	<select id="selectContactOne" parameterType="String" resultType="ContactDTO">
+		SELECT
+				*
+		FROM
+				CONTACT
+		WHERE
+				MEMBER_ID = #{memberId}
+	
+	</select>	
+</mapper>
