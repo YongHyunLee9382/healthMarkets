@@ -10,12 +10,16 @@
 		<put-attribute name="content" value="/WEB-INF/views/client/contact/addContact.jsp" />
 	</definition>
 	
-		<definition name="/contactDetail" extends="default">
-		<put-attribute name="title" value="CONTACT" />
+	<definition name="/contactDetail" extends="default">
+		<put-attribute name="title" value="CONTACTDETAIL" />
 		<put-attribute name="content" value="/WEB-INF/views/client/contact/contactDetail.jsp" />
 	</definition>
-
 	
+	<definition name="/contactList" extends="default">
+		<put-attribute name="title" value="CONTACTLIST" />
+		<put-attribute name="content" value="/WEB-INF/views/client/contact/contactList.jsp" />
+	</definition>
+
 </tiles-definitions>
 
 

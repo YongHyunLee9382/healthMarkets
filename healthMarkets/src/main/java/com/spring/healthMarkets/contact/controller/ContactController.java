@@ -48,11 +48,19 @@ public class ContactController {
 	}
 	
 	@GetMapping("/contactDetail")
-	public ModelAndView contactDetail(@RequestParam("memberId") String memberId) throws Exception{
+	public ModelAndView contactDetail(@RequestParam("contactCd") int contactCd) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/contactDetail");
-		mv.addObject("contactDTO" , contactService.getContactDetail(memberId));
+		mv.addObject("contactDTO" , contactService.getContactDetail(contactCd));
+		return mv;
+	}
+	
+	@GetMapping("/contactList")
+	public ModelAndView contactList(@RequestParam("memberId") String memberId) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/contactList");
+		mv.addObject("contactList" , contactService.getContactList(memberId));
 		return mv;
 	}
 	

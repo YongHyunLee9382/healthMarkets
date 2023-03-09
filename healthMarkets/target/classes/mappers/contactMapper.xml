@@ -22,13 +22,22 @@
 		)
 	</insert>
 	
-	<select id="selectContactOne" parameterType="String" resultType="ContactDTO">
+	<select id="selectContactOne" parameterType="int" resultType="ContactDTO">
 		SELECT
 				*
 		FROM
 				CONTACT
 		WHERE
-				MEMBER_ID = #{memberId}
+				CONTACT_CD = #{contactCd}
 	
+	</select>
+	
+	<select id="selectContactList" parameterType="String" resultType="ContactDTO">
+		SELECT
+				*
+		FROM
+				CONTACT
+		WHERE
+				MEMBER_ID = #{memberId}		
 	</select>	
 </mapper>

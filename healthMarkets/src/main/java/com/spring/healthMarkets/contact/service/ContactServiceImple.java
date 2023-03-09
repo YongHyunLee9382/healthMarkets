@@ -1,5 +1,7 @@
 package com.spring.healthMarkets.contact.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -21,8 +23,14 @@ public class ContactServiceImple implements ContactService {
 	}
 
 	@Override
-	public ContactDTO getContactDetail(String memberId) throws Exception {
+	public ContactDTO getContactDetail(int contactCd) throws Exception {
 		
-		return contactDAO.selectContactOne(memberId);
+		return contactDAO.selectContactOne(contactCd);
+	}
+
+	@Override
+	public List<ContactDTO> getContactList(String memberId) throws Exception {
+		
+		return contactDAO.selectContactList(memberId);
 	}
 }

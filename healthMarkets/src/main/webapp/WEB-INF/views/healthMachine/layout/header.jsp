@@ -59,7 +59,7 @@
                             		<li><a href="#">Contact</a>
                             		<ul class="dropdown">
                             			<li><a href="${contextPath}/contact/addContact ">AddContact</a></li>
-                            			<li><a href="${contextPath}/contact/contactDetail?memberId=${sessionScope.memberId}">Contact Detail</a></li>
+                            			<li><a href="${contextPath}/contact/contactList?memberId=${sessionScope.memberId}">Contact List</a></li>
                             		</ul>
                            			</li>
                            		</c:when>
