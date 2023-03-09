@@ -47,7 +47,8 @@ public class AdminGoodsController {
 	@Autowired
 	private GoodsService goodsService;
 	
-	private final String PRODUCT_REPO_PATH = "C:\\file_repository\\";	
+	private final String PRODUCT_REPO_PATH = "C:\\file_repository\\";
+	//private final String PRODUCT_REPO_PATH = "/var/lib/tomcat9/file_repository/";
 	
 	@GetMapping("/adminGoodsList")
 	public ModelAndView adminGoodsList() throws Exception{

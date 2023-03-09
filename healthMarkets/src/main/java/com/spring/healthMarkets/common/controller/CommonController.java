@@ -16,6 +16,7 @@ import net.coobird.thumbnailator.Thumbnails;
 public class CommonController {
 	
 	private final String PRODUCT_REPO_PATH = "C:\\file_repository\\";
+	//private final String PRODUCT_REPO_PATH = "/var/lib/tomcat9/file_repository/";
 	
 	@GetMapping("/")
 	public String main() {

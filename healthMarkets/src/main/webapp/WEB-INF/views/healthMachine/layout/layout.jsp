@@ -75,19 +75,42 @@
         <ul class="offcanvas__widget">
             <li><span class="icon_search search-switch"></span></li>
             <li><a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">2</div>
+                <!--  <div class="tip">2</div> -->
             </a></li>
             <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
+
             </a></li>
         </ul>
         <div class="offcanvas__logo">
-            <a href="./index.html"><img src="${contextPath }/resources/ashion-master/img/logo.png" alt=""></a>
+     		<c:choose>
+				<c:when test="${sessionScope.role eq 'admin'}">
+					<a href="${contextPath}/admin/member/adminMain"><img src="${contextPath }/resources/healthMachine/logo.png"  alt=""></a>
+				</c:when>
+				<c:otherwise>
+					<a href="${contextPath}"><img src="${contextPath }/resources/healthMachine/logo.png"  alt=""></a>
+				</c:otherwise>
+			</c:choose>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
-            <a href="${contextPath}/member/login">Login</a>
-            <a href="${contextPath}/member/register">Register</a>
+             <c:choose>
+				<c:when test="${sessionScope.memberId eq null }">
+					<a href="${contextPath}/member/login">Login</a>
+					<a href="${contextPath}/member/register">Register</a>
+				</c:when>
+                <c:when test="${sessionScope.memberId eq 'admin' }">
+					<a href="${contextPath}/admin/member/adminLogout">관리자 로그아웃</a>
+                </c:when>
+				<c:otherwise>
+					<a href="${contextPath}/member/logout">Logout</a>
+                </c:otherwise>
+			</c:choose>
+			
+			<c:choose>
+				<c:when test="${sessionScope.memberId eq null }">
+                     <p><a href="${contextPath}/admin/member/adminLogin">관리자 로그인</a></p>
+				</c:when>
+			</c:choose>
         </div>
     </div>
     <!-- Offcanvas Menu End -->
