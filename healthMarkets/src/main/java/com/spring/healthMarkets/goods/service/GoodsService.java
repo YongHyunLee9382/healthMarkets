@@ -10,4 +10,5 @@ import com.spring.healthMarkets.goods.dto.GoodsDTO;
 public interface GoodsService {
 	public GoodsDTO getGoodsDetail(int productCd) throws Exception;
 	public List<GoodsDTO> getRelatedGoodsList(GoodsDTO goodsDTO) throws Exception;
+	public List<GoodsDTO> getGoodsList(GoodsDTO goodsDTO) throws Exception;
 }

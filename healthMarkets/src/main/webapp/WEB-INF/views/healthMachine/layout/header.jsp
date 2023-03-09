@@ -47,10 +47,10 @@
                             	</li>	
                             	</c:when>
                             	<c:otherwise>
-                            		<li><a href="./shop.html">Shop</a></li>
+                            		<li><a href="${contextPath }/goods/goodsList?sort=all&part=all">Shop</a></li>
                             		<li><a href="#">Pages</a>
                                 	<ul class="dropdown">
-                                    	<li><a href="./shop-cart.html">Shop Cart</a></li>
+                                    	<li><a href="#">Shop Cart</a></li>
                                     	<li><a href="${contextPath}/myPage/myInfo?memberId=${sessionScope.memberId}">MyPage</a></li>
                                 	</ul>
                             		</li>

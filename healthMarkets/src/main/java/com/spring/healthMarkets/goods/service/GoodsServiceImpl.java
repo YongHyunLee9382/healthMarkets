@@ -26,4 +26,10 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<GoodsDTO> getRelatedGoodsList(GoodsDTO goodsDTO) throws Exception {
 		return goodsDAO.selectRelatedGoodsList(goodsDTO);
 	}
+
+	@Override
+	public List<GoodsDTO> getGoodsList(GoodsDTO goodsDTO) throws Exception {
+
+		return goodsDAO.selectGoodsList(goodsDTO);
+	}
 }

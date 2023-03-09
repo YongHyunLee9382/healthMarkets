@@ -25,4 +25,22 @@
 				4            		       
 	</select>
 	
+	<select id="selectListGoods" parameterType="GoodsDTO" resultType="GoodsDTO" >
+		SELECT 
+	   			*
+	    FROM 
+				GOODS
+		<where>
+			<if test='!sort.equals("all") and !part.equals("all")'>
+				SORT = #{sort} AND PART = #{part}
+			</if>
+			<if test='!sort.equals("all") and part.equals("all")'>
+				SORT = #{sort} AND PART IN ('programming' , 'network' , 'server' , 'cloud' , 'bigData' , 'artificialIntelligence' , 'certificate')
+			</if>
+			<if test='sort.equals("all") and part.equals("all")'>
+				SORT IN ('new' , 'best' , 'steady' , 'general') AND PART IN ('programming' , 'network' , 'server' , 'cloud' , 'bigData' , 'artificialIntelligence' , 'certificate')
+			</if>
+		</where> 	            		       
+	</select>
+	
 </mapper>

@@ -9,5 +9,6 @@ import com.spring.healthMarkets.goods.dto.GoodsDTO;
 public interface GoodsDAO {
 	public GoodsDTO selectOneGoods(int productCd)throws Exception;
 	public List<GoodsDTO> selectRelatedGoodsList(GoodsDTO goodsDTO) throws Exception;
+	public List<GoodsDTO> selectGoodsList(GoodsDTO goodsDTO) throws Exception;
 	
 }

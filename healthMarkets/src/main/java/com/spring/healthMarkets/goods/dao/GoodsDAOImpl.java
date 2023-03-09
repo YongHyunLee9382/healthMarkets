@@ -26,4 +26,9 @@ public class GoodsDAOImpl implements GoodsDAO {
 	public List<GoodsDTO> selectRelatedGoodsList(GoodsDTO goodsDTO) throws Exception {
 		return sqlSession.selectList("goods.selectListRelatedGoods" , goodsDTO);
 	}
+
+	@Override
+	public List<GoodsDTO> selectGoodsList(GoodsDTO goodsDTO) throws Exception {
+		return sqlSession.selectList("goods.selectListGoods" , goodsDTO);	
+	}
 }
