@@ -1,5 +1,7 @@
 package com.spring.healthMarkets.goods.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -45,6 +47,18 @@ public class GoodsController {
 		mv.setViewName("/goods/goodsList");
 		
 		mv.addObject("goodsList" , goodsService.getGoodsList(goodsDTO));
+		
+		return mv;
+		
+	}
+	
+	@GetMapping("/searchGoods")
+	public ModelAndView goodsDetail(@RequestParam Map<String,Object> searchMap)throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("/goods/goodsList");
+		mv.addObject("goodsList" , goodsService.getSearchGoodsList(searchMap));
 		
 		return mv;
 		

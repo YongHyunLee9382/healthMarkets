@@ -1,7 +1,7 @@
 package com.spring.healthMarkets.admin.goods.service;
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,9 +23,9 @@ public class AdminGoodsServiceImpl implements AdminGoodsService {
 	}
 
 	@Override
-	public List<GoodsDTO> getGoodsList() throws Exception {
+	public List<GoodsDTO> getGoodsList(Map<String, Object> searchMap) throws Exception {
 		
-		return adminGoodsDAO.selectGoodsList();
+		return adminGoodsDAO.selectGoodsList(searchMap);
 	}
 
 	@Override
@@ -38,5 +38,15 @@ public class AdminGoodsServiceImpl implements AdminGoodsService {
 	public void modifyGoods(GoodsDTO goodsDTO) throws Exception {
 		adminGoodsDAO.updateGoods(goodsDTO);
 		
+	}
+
+	@Override
+	public int getAllGoodsCnt(Map<String, String> searchCntMap) throws Exception {
+		return adminGoodsDAO.selectOneAllGoodsCnt(searchCntMap);
+	}
+
+	@Override
+	public List<GoodsDTO> getGoodsList() throws Exception {
+		return adminGoodsDAO.selectGoodsList();
 	}
 }

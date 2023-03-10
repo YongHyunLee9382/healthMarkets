@@ -19,7 +19,7 @@
                         		<a href="${contextPath}/admin/member/adminMain"><img src="${contextPath }/resources/healthMachine/logo.png"  alt=""></a>
                         	</c:when>
                         	<c:otherwise>
-                        		<a href="${contextPath}"><img src="${contextPath }/resources/healthMachine/logo.png"  alt=""></a>
+                        		<a href="${contextPath}/"><img src="${contextPath }/resources/healthMachine/logo.png"  alt=""></a>
                         	</c:otherwise>
                         </c:choose>
                     </div>
@@ -32,7 +32,7 @@
                         		<li class="active"><a href="${contextPath}/admin/member/adminMain">Home</a></li>
                         	</c:when>
                         	<c:otherwise>
-                        		<li class="active"><a href="${contextPath}">Home</a></li>
+                        		<li class="active"><a href="${contextPath}/">Home</a></li>
                         	</c:otherwise>
                         </c:choose>
                             <c:choose>

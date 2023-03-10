@@ -7,6 +7,23 @@
 <head>
 <meta charset="utf-8">
 <script>
+	$().ready(function(){
+		
+		$("#onePageViewCnt").val("${onePageViewCnt}");
+		$("#searchKeyword").val("${searchKeyword}");
+		
+	});
+	
+	function getGoodsList() {
+		
+		var url = "${contextPath }/admin/goods/adminGoodsList"
+		    url += "?searchKeyword=" +  $("#searchKeyword").val();
+		    url += "&searchWord=" + $("#searchWord").val() 
+		    url += "&onePageViewCnt=" + $("#onePageViewCnt").val();
+		
+		location.href = url;
+	
+	}
 	
 	function adminGoodsRemove(productCd) {
 		if (confirm("정말로 삭제하시겠습니까?")) {
@@ -47,6 +64,19 @@
                     <div class="shop__cart__table">
                         <table>
                             <thead>
+	                            <tr>
+									<td> 
+										조회 : <span style="color:red">${allGoodsCnt}</span>개
+									</td>
+									<td colspan="4" align="right" >
+										<select id="onePageViewCnt" onchange="getGoodsList()" >
+											<option value="">전체</option>
+											<option>5</option>
+											<option>7</option>
+											<option>10</option>
+										</select>
+									</td>
+								</tr>
                                 <tr>
                                     <th width="5%">코드</th>
                                     <th width="75%">상품정보</th>
@@ -83,8 +113,37 @@
 		                            	</c:forEach>
                             		</c:otherwise>
                             	</c:choose>
+                            	<tr>
+									<td colspan="5" align="center">			
+										<select id="searchKeyword">
+											<option value="total">전체검색</option>
+											<option value="productNm">상품명</option>
+										</select>
+										<input type="text" id="searchWord" name="searchWord" value="${searchWord }">
+										<input type="button" value="검색" onclick="getGoodsList()">
+									</td>
+								</tr>
                             </tbody>
                         </table>
+                        <div style="display: table; margin-left: auto; margin-right: auto">
+							<ul>
+								<c:if test="${startPage > 10}">
+									<li>
+										<a href="${contextPath }/admin/goods/adminGoodsList?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}" >이전 </a>
+									</li> 
+								</c:if>
+								<c:forEach var="i" begin="${startPage }" end="${endPage }">
+									<li>
+										<a href="${contextPath }/admin/goods/adminGoodsList?currentPageNumber=${i }&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}">${i } &nbsp;</a>
+									</li>
+								</c:forEach>
+								<c:if test="${endPage != allPageCnt && endPage >= 10}">
+									<li>
+										<a href="${contextPath }/admin/goods/adminGoodsList?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}"> 다음 </a>
+									</li> 
+								</c:if>
+							</ul>
+						</div>
                     </div>
 	            <div align="right">
 	                <button type="button" onclick="javascript:location.href='${contextPath}/admin/goods/adminGoodsAdd'" class="site-btn"><span class="icon_plus"></span> 등록</button>

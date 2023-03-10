@@ -4,9 +4,12 @@ import java.io.File;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -51,10 +54,69 @@ public class AdminGoodsController {
 	//private final String PRODUCT_REPO_PATH = "/var/lib/tomcat9/file_repository/";
 	
 	@GetMapping("/adminGoodsList")
-	public ModelAndView adminGoodsList() throws Exception{
+	public ModelAndView adminGoodsList(HttpServletRequest request) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/admin/goods/adminGoodsList");
-		mv.addObject("goodsList", adminGoodsService.getGoodsList());
+		
+		String searchKeyword = request.getParameter("searchKeyword");
+		if (searchKeyword == null) searchKeyword = "total";
+		
+		String searchWord = request.getParameter("searchWord");
+		if (searchWord == null) searchWord = "";
+		
+		
+		int onePageViewCnt = 10;
+		
+		if (request.getParameter("onePageViewCnt") != null) {
+			onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
+		}
+		
+		
+		String temp = request.getParameter("currentPageNumber");
+		if (temp == null) {
+			temp = "1";
+		}
+		int currentPageNumber = Integer.parseInt(temp);
+		
+		Map<String, String> searchCntMap = new HashMap<String, String>();
+		searchCntMap.put("searchKeyword", searchKeyword);
+		searchCntMap.put("searchWord", searchWord);
+		
+		
+		int allGoodsCnt = adminGoodsService.getAllGoodsCnt(searchCntMap);
+		
+		int allPageCnt = allGoodsCnt / onePageViewCnt + 1;
+		
+		if (allGoodsCnt % onePageViewCnt == 0) allPageCnt--;
+		
+		int startPage = (currentPageNumber - 1)  / 10  * 10 + 1;
+		if (startPage == 0) {
+			startPage = 1;
+		}
+		
+		int endPage = startPage + 9;
+		
+		if (endPage > allPageCnt) endPage = allPageCnt;
+		
+		
+		int startBoardIdx = (currentPageNumber - 1) * onePageViewCnt;
+		
+		mv.addObject("startPage"         , startPage);
+		mv.addObject("endPage"           , endPage);
+		mv.addObject("allGoodsCnt"   	 , allGoodsCnt);
+		mv.addObject("allPageCnt"   	 , allPageCnt);
+		mv.addObject("onePageViewCnt"    , onePageViewCnt);
+		mv.addObject("currentPageNumber" , currentPageNumber);
+		mv.addObject("startBoardIdx"     , startBoardIdx);
+		mv.addObject("searchKeyword"     , searchKeyword);
+		mv.addObject("searchWord"        , searchWord);
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("onePageViewCnt" , onePageViewCnt);
+		searchMap.put("startBoardIdx"  , startBoardIdx);
+		searchMap.put("searchKeyword"  , searchKeyword);
+		searchMap.put("searchWord"     , searchWord);
+		mv.addObject("goodsList"      ,  adminGoodsService.getGoodsList(searchMap));		
 		
 		return mv;
 	}

@@ -19,7 +19,7 @@
                     <div class="categories__text">
                         <h1>Health Market</h1>
                         <p>What's important is the unbreakable heart.</p>
-                        <a href="#">Shop now</a>
+                        <a href="${contextPath }/goods/goodsList?sort=all&part=all">Shop now</a>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                             <div class="categories__text">
                                 <h4>Leg's Machine</h4>
                                 <p>7 items</p>
-                                <a href="#">Shop now</a>
+                                <a href="${contextPath }/goods/goodsList?sort=weight&part=leg">Shop now</a>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                             <div class="categories__text">
                                 <h4>Back’s Machine</h4>
                                 <p>4 items</p>
-                                <a href="#">Shop now</a>
+                                <a href="${contextPath }/goods/goodsList?sort=weight&part=back">Shop now</a>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                             <div class="categories__text">
                                 <h4>Chest's Machine</h4>
                                 <p>5 items</p>
-                                <a href="#">Shop now</a>
+                                <a href="${contextPath }/goods/goodsList?sort=weight&part=chest">Shop now</a>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                             <div class="categories__text">
                                 <h4>Aerobic's Machine</h4>
                                 <p>17 items</p>
-                                <a href="#">Shop now</a>
+                                <a href="${contextPath }/goods/goodsList?sort=aerobic&part=all">Shop now</a>
                             </div>
                         </div>
                     </div>
@@ -277,7 +277,7 @@
                             <p>Sec</p>
                         </div>
                     </div>
-                    <a href="#">Shop now</a>
+                    <a href="${contextPath }/goods/goodsList?sort=all&part=all">Shop now</a>
                 </div>
             </div>
         </div>

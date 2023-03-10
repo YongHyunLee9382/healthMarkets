@@ -1,7 +1,7 @@
 package com.spring.healthMarkets.goods.service;
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +31,10 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<GoodsDTO> getGoodsList(GoodsDTO goodsDTO) throws Exception {
 
 		return goodsDAO.selectGoodsList(goodsDTO);
+	}
+
+	@Override
+	public List<GoodsDTO> getSearchGoodsList(Map<String, Object> searchMap) throws Exception {
+		return goodsDAO.selectListSearchGoods(searchMap);
 	}
 }

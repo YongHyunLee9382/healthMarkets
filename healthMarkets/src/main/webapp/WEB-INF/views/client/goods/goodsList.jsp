@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 <script>
 
-	function processToCart(goodsCd) {
+	function processToCart(productCd) {
 		
 		if ("${sessionId == null}" == "true") {
 			alert("로그인을 진행해주세요.");
@@ -21,7 +21,7 @@
 			$.ajax({
 				url : "${contextPath }/myPage/addCart",
 				method : "get",
-				data : {"goodsCd" : goodsCd , "cartGoodsQty" : 1},
+				data : {"productCd" : productCd , "cartGoodsQty" : 1},
 				success : function(result) {
 					
 					if (result == "duple") {
@@ -38,20 +38,20 @@
 		
 	}
 	
-	function processToOrder(goodsCd) {
+	function processToOrder(productCd) {
 		
 		if ("${sessionId == null}" == "true") {
 			alert("로그인을 진행해주세요.");
 			location.href = "${contextPath }/member/login";
 		}
 		else {
-			location.href = "${contextPath }/order/orderGoods?goodsCd="+goodsCd+"&orderGoodsQty=1";	
+			location.href = "${contextPath }/order/orderGoods?productCd="+productCd+"&orderGoodsQty=1";	
 		}
 		
 	}
 	
 	function getGoodsListByPrice(){
-		location.href =  "${contextPath }/goods/searchGoods?method=price&min="+$("#minamount").val() + "&max=" + $("#maxamount").val();
+		location.href = "${contextPath }/goods/searchGoods?method=price&min="+$("#minamount").val() + "&max=" + $("#maxamount").val();
 	}
 	
 </script>
@@ -120,13 +120,7 @@
                                         <div id="collapseThree" class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
                                                 <ul>
-                                                    <li><a href="${contextPath }/goods/goodsList?sort=steady&part=programming">Programming</a></li>
-                                                    <li><a href="${contextPath }/goods/goodsList?sort=steady&part=network">Network</a></li>
-                                                    <li><a href="${contextPath }/goods/goodsList?sort=steady&part=server">Server</a></li>
-                                                    <li><a href="${contextPath }/goods/goodsList?sort=steady&part=cloud">Cloud</a></li>
-                                                    <li><a href="${contextPath }/goods/goodsList?sort=steady&part=bigData">Big Data</a></li>
-                                                    <li><a href="${contextPath }/goods/goodsList?sort=steady&part=artificialIntelligence">Artificial Intelligence</a></li>
-                                                    <li><a href="${contextPath }/goods/goodsList?sort=steady&part=certificate">Certificate</a></li>
+                                                    <li><a href="${contextPath }/goods/goodsList?sort=freeWeight&part=multi">Multi</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -135,32 +129,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="sidebar__filter">
-                            <div class="section-title">
-                                <h4>Shop by price</h4>
-                            </div>
-                            <div class="filter-range-wrap">
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="0" data-max="150000" onmouseup="getGoodsListByPrice()"></div>
-                                <div class="range-slider">
-                                    <div>
-                                        <p></p>
-                                        <span></span>
-                                        <input type="text" id="minamount" style="border:none;" size="7" > ~ 
-                                        <input type="text" id="maxamount" style="border:none;" size="7">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="sidebar__sizes">
                             <div class="section-title">
                                 <h4>Shop by Category</span></h4>
                             </div>
                             <div class="size__list">
-                                <p><a href="${contextPath }/goods/searchGoods?method=keyword&keyword=publishedDt">최신순</a></p>
                                 <p><a href="${contextPath }/goods/searchGoods?method=keyword&keyword=highPrice">높은가격순</a></p>
                                 <p><a href="${contextPath }/goods/searchGoods?method=keyword&keyword=lowPrice">낮은가격순</a></p>
-                                <p><a href="${contextPath }/goods/searchGoods?method=keyword&keyword=discountRate">할인률이 높은순</a></p>
+                                <p><a href="${contextPath }/goods/searchGoods?method=keyword&keyword=discountRt">할인률이 높은순</a></p>
                             </div>
                         </div>
                         <div class="sidebar__color">
@@ -191,9 +168,9 @@
 			                            <div class="product__item">
 			                                <div class="product__item__pic set-bg" data-setbg="${contextPath }/thumbnails?productFileName=${goodsDTO.productFileName}">
 			                                    <c:choose>
-			                                    	<c:when test="${goodsDTO.sort eq 'new' }"> <div class="label new">New</div></c:when>
-			                                    	<c:when test="${goodsDTO.sort eq 'best' }">  <div class="label sale">Best</div></c:when>
-			                                    	<c:when test="${goodsDTO.sort eq 'steady' }"> <div class="label stockout stockblue">Steady</div></c:when>
+			                                    	<c:when test="${goodsDTO.sort eq 'aerobic' }"> <div class="label new">Aerobic</div></c:when>
+			                                    	<c:when test="${goodsDTO.sort eq 'weight' }">  <div class="label sale">Weight</div></c:when>
+			                                    	<c:when test="${goodsDTO.sort eq 'freeWeight' }"> <div class="label stockout stockblue">Free Weight</div></c:when>
 			                                    </c:choose>
 			                                    <ul class="product__hover">
 			                                        <li><a href="${contextPath }/thumbnails?productFileName=${goodsDTO.productFileName}" class="image-popup"><span class="arrow_expand"></span></a></li>

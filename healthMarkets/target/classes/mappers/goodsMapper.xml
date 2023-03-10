@@ -35,12 +35,54 @@
 				SORT = #{sort} AND PART = #{part}
 			</if>
 			<if test='!sort.equals("all") and part.equals("all")'>
-				SORT = #{sort} AND PART IN ('programming' , 'network' , 'server' , 'cloud' , 'bigData' , 'artificialIntelligence' , 'certificate')
+				SORT = #{sort} AND PART IN ('running' , 'cycle' , 'shoulder' , 'back' , 'chest' , 'leg' , 'multi')
 			</if>
 			<if test='sort.equals("all") and part.equals("all")'>
-				SORT IN ('new' , 'best' , 'steady' , 'general') AND PART IN ('programming' , 'network' , 'server' , 'cloud' , 'bigData' , 'artificialIntelligence' , 'certificate')
+				SORT IN ('aerobic' , 'weight' , 'freeWeight') AND PART IN ('running' , 'cycle' , 'shoulder' , 'back' , 'chest' , 'leg' , 'multi')
 			</if>
 		</where> 	            		       
 	</select>
 	
+	
+	<select id="selectListSearchGoods" parameterType="hashmap" resultType="GoodsDTO" >
+
+		<if test='method == "price"'>
+			SELECT 
+		   			*
+		    FROM 
+					GOODS
+			WHERE
+					PRICE BETWEEN #{min} AND #{max} 
+			ORDER BY
+					PRICE
+		</if>
+		<if test='method == "keyword"'>
+			SELECT 
+		   			*
+		    FROM 
+					GOODS
+			ORDER BY
+				<if test='keyword == "highPrice"'>
+					PRICE DESC
+				</if>
+				<if test='keyword == "lowPrice"'>
+					PRICE ASC
+				</if>
+				<if test='keyword == "discountRt"'>
+					DISCOUNT_RT DESC
+				</if>
+		</if>
+		<if test='method == "search"'>
+			SELECT 
+		   			*
+		    FROM 
+					GOODS
+			WHERE
+					PRODUCT_NM  LIKE CONCAT('%' , #{word} , '%') OR
+					SORT 	  LIKE CONCAT('%' , #{word} , '%') OR
+					PART LIKE CONCAT('%' , #{word} , '%') OR
+					INTRO     LIKE CONCAT('%' , #{word} , '%') 
+		</if>
+		
+	</select>
 </mapper>
