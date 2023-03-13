@@ -12,4 +12,10 @@ public interface MemberService {
 	public String findMemberId(MemberDTO memberDTO) throws Exception;
 	
 	public boolean findMemberPasswd(MemberDTO memberDTO) throws Exception;
+	
+	public void getDailyNewMemberList() throws Exception;
+	
+	public int getMyOrderCnt(String memberId) throws Exception;
+	
+	//public int getMyCartCnt(String memberId) throws Exception;
 }

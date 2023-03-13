@@ -1,10 +1,13 @@
 package com.spring.healthMarkets.member.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.healthMarkets.contact.dto.ContactDTO;
 import com.spring.healthMarkets.member.dto.MemberDTO;
 
 
@@ -46,5 +49,15 @@ public class MemberDAOImpl implements MemberDAO {
 	public void updatePasswd(MemberDTO memberDTO) throws Exception {
 		sqlSession.update("member.updatePasswd", memberDTO);
 		
+	}
+
+	@Override
+	public List<MemberDTO> selectListDailyNewMember(String today) throws Exception {
+		return sqlSession.selectList("member.selectListDailyNewMember" , today);
+	}
+
+	@Override
+	public int selectMyOrderCnt(String memberId) throws Exception {
+		return sqlSession.selectOne("member.selectMyOrderCnt" , memberId);
 	}
 }

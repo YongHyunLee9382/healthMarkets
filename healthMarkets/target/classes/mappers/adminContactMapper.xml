@@ -50,4 +50,83 @@
 	
 	</update>
 	
+	
+	<select id="selectContactList" resultType="ContactDTO" parameterType="hashmap">
+		<choose>
+			<when test='searchKeyword.equals("total")'>
+				<choose>
+					<when test='searchWord.equals("")'>
+						SELECT
+								*
+						FROM
+								CONTACT
+						ORDER BY
+								REG_DT DESC
+						LIMIT 
+								#{startBoardIdx},#{onePageViewCnt}
+					</when>
+					<otherwise>
+						SELECT 
+								*
+						FROM
+								CONTACT
+						WHERE
+								SUBJECT LIKE CONCAT('%' , #{searchWord} , '%') 
+						ORDER BY
+								REG_DT DESC
+						LIMIT 
+								#{startBoardIdx},#{onePageViewCnt}
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				SELECT
+						*
+				FROM
+						CONTACT
+				WHERE
+					<if test='searchKeyword.equals("subject")'>
+						SUBJECT LIKE CONCAT('%' , #{searchWord} , '%')
+					</if>
+				ORDER BY
+						REG_DT DESC
+				LIMIT
+						#{startBoardIdx} , #{onePageViewCnt}
+			</otherwise>
+		</choose>		
+	</select>
+	
+	<select id="selectOneAllContactCnt" parameterType="hashmap" resultType="int">
+		<choose>
+			<when test='searchKeyword.equals("total")'>
+				<choose>
+					<when test='searchWord.equals("")'>
+						SELECT 
+								COUNT(*) 
+						FROM 
+								CONTACT
+					</when>
+					<otherwise>
+						SELECT 
+								COUNT(*) 
+						FROM 
+								CONTACT
+						WHERE
+								SUBJECT LIKE CONCAT('%',#{searchWord},'%')
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				SELECT 
+						COUNT(*) 
+				FROM 
+						CONTACT
+				WHERE
+					<if test='searchKeyword.equals("subject")'>
+						SUBJECT LIKE CONCAT('%' , #{searchWord} , '%')
+					</if>
+			</otherwise>
+		</choose>	
+	</select>
+	
 </mapper>

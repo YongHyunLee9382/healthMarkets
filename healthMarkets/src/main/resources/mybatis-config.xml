@@ -12,6 +12,7 @@
 	 	<typeAlias type="com.spring.healthMarkets.goods.dto.GoodsDTO" alias="GoodsDTO"/>
 	 	<typeAlias type="com.spring.healthMarkets.member.dto.MemberDTO" alias="MemberDTO"/>
 	 	<typeAlias type="com.spring.healthMarkets.contact.dto.ContactDTO"      alias="ContactDTO" />
+	 	<typeAlias type="com.spring.healthMarkets.order.dto.OrderDTO"      alias="OrderDTO" />
 	 </typeAliases>
 	 
 	 

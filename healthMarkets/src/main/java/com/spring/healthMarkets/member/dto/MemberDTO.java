@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MemberDTO {
+	
 	private String memberId;
 	private String memberNm;
 	private String passwd;
@@ -112,5 +113,12 @@ public class MemberDTO {
 		this.joinDt = joinDt;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "MemberDTO [memberId=" + memberId + ", memberNm=" + memberNm + ", passwd=" + passwd + ", sex=" + sex
+				+ ", birthDt=" + birthDt + ", hp=" + hp + ", smsstsYn=" + smsstsYn + ", email=" + email
+				+ ", emailstsYn=" + emailstsYn + ", zipcode=" + zipcode + ", roadAddress=" + roadAddress
+				+ ", jibunAddress=" + jibunAddress + ", namujiAddress=" + namujiAddress + ", point=" + point
+				+ ", joinDt=" + joinDt + "]";
+	}
 }

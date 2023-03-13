@@ -3,6 +3,9 @@ package com.spring.healthMarkets.admin.contact.controller;
 
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -55,10 +58,66 @@ public class AdminContactController {
 	
 		
 	@GetMapping("/contactList")
-	public ModelAndView contactList() throws Exception{
+	public ModelAndView contactList(HttpServletRequest request) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/admin/contact/contactList");
-		mv.addObject("contactList" , adminContactService.getContactList());
+		
+		String searchKeyword = request.getParameter("searchKeyword");
+		if (searchKeyword == null) searchKeyword = "total";
+		
+		String searchWord = request.getParameter("searchWord");
+		if (searchWord == null) searchWord = "";
+
+		int onePageViewCnt = 10;
+		
+		if (request.getParameter("onePageViewCnt") != null && !request.getParameter("onePageViewCnt").equals("total")) {
+			onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
+		}
+		
+		String temp = request.getParameter("currentPageNumber");
+		if (temp == null) {
+			temp = "1";
+		}
+		int currentPageNumber = Integer.parseInt(temp);
+		
+		Map<String, String> searchCntMap = new HashMap<String, String>();
+		searchCntMap.put("searchKeyword", searchKeyword);
+		searchCntMap.put("searchWord", searchWord);
+		
+		int allContactCnt = adminContactService.getAllContactCnt(searchCntMap);
+		
+		int allPageCnt = allContactCnt / onePageViewCnt + 1;
+		
+		if (allContactCnt % onePageViewCnt == 0) allPageCnt--;
+		
+		int startPage = (currentPageNumber - 1)  / 3  * 3 + 1;
+		if (startPage == 0) {
+			startPage = 1;
+		}
+		
+		int endPage = startPage + 2;
+		
+		if (endPage > allPageCnt) endPage = allPageCnt;
+		
+		int startBoardIdx = (currentPageNumber - 1) * onePageViewCnt;
+		
+		mv.addObject("startPage"         , startPage);
+		mv.addObject("endPage"           , endPage);
+		mv.addObject("allContactCnt"   	 , allContactCnt);
+		mv.addObject("allPageCnt"   	 , allPageCnt);
+		mv.addObject("onePageViewCnt"    , onePageViewCnt);
+		mv.addObject("currentPageNumber" , currentPageNumber);
+		mv.addObject("startBoardIdx"     , startBoardIdx);
+		mv.addObject("searchKeyword"     , searchKeyword);
+		mv.addObject("searchWord"        , searchWord);
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("onePageViewCnt" , onePageViewCnt);
+		searchMap.put("startBoardIdx"  , startBoardIdx);
+		searchMap.put("searchKeyword"  , searchKeyword);
+		searchMap.put("searchWord"     , searchWord);
+		mv.addObject("contactList"      ,  adminContactService.getContactList(searchMap));
+		
 		return mv;
 	}
 	

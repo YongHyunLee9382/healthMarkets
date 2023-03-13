@@ -3,6 +3,8 @@ package com.spring.healthMarkets.admin.member.controller;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -108,7 +110,62 @@ public class AdminMemberController {
 		HttpSession session = request.getSession();
 		session.setAttribute("sideMenu", "adminMode");
 		
-		mv.addObject("memberList" , adminMemberService.getMemberList());
+		String searchKeyword = request.getParameter("searchKeyword");
+		if (searchKeyword == null) searchKeyword = "total";
+		
+		String searchWord = request.getParameter("searchWord");
+		if (searchWord == null) searchWord = "";
+
+		int onePageViewCnt = 10;
+		
+		if (request.getParameter("onePageViewCnt") != null && !request.getParameter("onePageViewCnt").equals("total")) {
+			onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
+		}
+		
+		String temp = request.getParameter("currentPageNumber");
+		if (temp == null) {
+			temp = "1";
+		}
+		int currentPageNumber = Integer.parseInt(temp);
+		
+		Map<String, String> searchCntMap = new HashMap<String, String>();
+		searchCntMap.put("searchKeyword", searchKeyword);
+		searchCntMap.put("searchWord", searchWord);
+		
+		int allMemberCnt = adminMemberService.getAllMemberCnt(searchCntMap);
+		
+		int allPageCnt = allMemberCnt / onePageViewCnt + 1;
+		
+		if (allMemberCnt % onePageViewCnt == 0) allPageCnt--;
+		
+		int startPage = (currentPageNumber - 1)  / 3  * 3 + 1;
+		if (startPage == 0) {
+			startPage = 1;
+		}
+		
+		int endPage = startPage + 2;
+		
+		if (endPage > allPageCnt) endPage = allPageCnt;
+		
+		int startBoardIdx = (currentPageNumber - 1) * onePageViewCnt;
+		
+		mv.addObject("startPage"         , startPage);
+		mv.addObject("endPage"           , endPage);
+		mv.addObject("allMemberCnt"   	 , allMemberCnt);
+		mv.addObject("allPageCnt"   	 , allPageCnt);
+		mv.addObject("onePageViewCnt"    , onePageViewCnt);
+		mv.addObject("currentPageNumber" , currentPageNumber);
+		mv.addObject("startBoardIdx"     , startBoardIdx);
+		mv.addObject("searchKeyword"     , searchKeyword);
+		mv.addObject("searchWord"        , searchWord);
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("onePageViewCnt" , onePageViewCnt);
+		searchMap.put("startBoardIdx"  , startBoardIdx);
+		searchMap.put("searchKeyword"  , searchKeyword);
+		searchMap.put("searchWord"     , searchWord);
+		mv.addObject("memberList"      ,  adminMemberService.getMemberList(searchMap));
+		
 		
 		return mv;
 		

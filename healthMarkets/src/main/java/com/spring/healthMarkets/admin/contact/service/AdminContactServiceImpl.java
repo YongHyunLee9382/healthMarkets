@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -52,5 +53,15 @@ public class AdminContactServiceImpl implements AdminContactService {
 	public void addAdminReply(ContactDTO contactDTO) throws Exception {
 		adminContactDAO.updateAdminReply(contactDTO);
 		
+	}
+
+	@Override
+	public List<ContactDTO> getContactList(Map<String, Object> searchMap) throws Exception {
+		return adminContactDAO.selectContactList(searchMap);
+	}
+
+	@Override
+	public int getAllContactCnt(Map<String, String> searchCntMap) throws Exception {
+		return adminContactDAO.selectOneAllContactCnt(searchCntMap);
 	}
 }

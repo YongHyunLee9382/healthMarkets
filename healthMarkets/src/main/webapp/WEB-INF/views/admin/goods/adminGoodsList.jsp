@@ -70,7 +70,7 @@
 									</td>
 									<td colspan="4" align="right" >
 										<select id="onePageViewCnt" onchange="getGoodsList()" >
-											<option value="">전체</option>
+											<option value="total">전체</option>
 											<option>5</option>
 											<option>7</option>
 											<option>10</option>
@@ -126,23 +126,15 @@
                             </tbody>
                         </table>
                         <div style="display: table; margin-left: auto; margin-right: auto">
-							<ul>
-								<c:if test="${startPage > 10}">
-									<li>
-										<a href="${contextPath }/admin/goods/adminGoodsList?currentPageNumber=${startPage - 10}&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}" >이전 </a>
-									</li> 
-								</c:if>
-								<c:forEach var="i" begin="${startPage }" end="${endPage }">
-									<li>
-										<a href="${contextPath }/admin/goods/adminGoodsList?currentPageNumber=${i }&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}">${i } &nbsp;</a>
-									</li>
-								</c:forEach>
-								<c:if test="${endPage != allPageCnt && endPage >= 10}">
-									<li>
-										<a href="${contextPath }/admin/goods/adminGoodsList?currentPageNumber=${startPage + 10}&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}"> 다음 </a>
-									</li> 
-								</c:if>
-							</ul>
+							<c:if test="${startPage > 3}">
+								<a href="${contextPath }/admin/goods/adminGoodsList?currentPageNumber=${startPage - 3}&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}" >이전 </a> 
+							</c:if>
+							<c:forEach var="i" begin="${startPage }" end="${endPage }">
+								<a href="${contextPath }/admin/goods/adminGoodsList?currentPageNumber=${i }&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}">${i } &nbsp;</a>
+							</c:forEach>
+							<c:if test="${endPage != allPageCnt && endPage >= 3}">
+								<a href="${contextPath }/admin/goods/adminGoodsList?currentPageNumber=${startPage + 3}&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}"> 다음 </a>
+							</c:if>
 						</div>
                     </div>
 	            <div align="right">

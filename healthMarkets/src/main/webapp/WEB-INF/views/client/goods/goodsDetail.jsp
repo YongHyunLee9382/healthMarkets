@@ -107,7 +107,7 @@
                             <div class="quantity">
                                 <span>수량 : </span>
                                 <div class="pro-qty">
-                                    <input type="text" id="orderGoodsQty" name="orderGoodsQty" value="1"> &emsp;&emsp;
+                                    <input type="number" id="orderGoodsQty" name="orderGoodsQty" value="1"> &emsp;&emsp;
                                 </div>
                             </div>
                             

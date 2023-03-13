@@ -1,7 +1,7 @@
 package com.spring.healthMarkets.admin.contact.dao;
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +40,15 @@ public class AdminContactDAOImpl implements AdminContactDAO {
 	public void updateAdminReply(ContactDTO contactDTO) throws Exception {
 		sqlSession.update("adminContact.updateAdminReply",contactDTO);
 		
+	}
+
+	@Override
+	public List<ContactDTO> selectContactList(Map<String, Object> searchMap) throws Exception {
+		return sqlSession.selectList("adminContact.selectContactList" , searchMap);
+	}
+
+	@Override
+	public int selectOneAllContactCnt(Map<String, String> searchCntMap) throws Exception {
+		return sqlSession.selectOne("adminContact.selectOneAllContactCnt" , searchCntMap);
 	}
 }

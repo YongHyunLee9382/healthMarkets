@@ -67,7 +67,7 @@ public class AdminGoodsController {
 		
 		int onePageViewCnt = 10;
 		
-		if (request.getParameter("onePageViewCnt") != null) {
+		if (request.getParameter("onePageViewCnt") != null && !request.getParameter("onePageViewCnt").equals("total")) {
 			onePageViewCnt = Integer.parseInt(request.getParameter("onePageViewCnt"));
 		}
 		
@@ -89,12 +89,12 @@ public class AdminGoodsController {
 		
 		if (allGoodsCnt % onePageViewCnt == 0) allPageCnt--;
 		
-		int startPage = (currentPageNumber - 1)  / 10  * 10 + 1;
+		int startPage = (currentPageNumber - 1)  / 3  * 3 + 1;
 		if (startPage == 0) {
 			startPage = 1;
 		}
 		
-		int endPage = startPage + 9;
+		int endPage = startPage + 2;
 		
 		if (endPage > allPageCnt) endPage = allPageCnt;
 		

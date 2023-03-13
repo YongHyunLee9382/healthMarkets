@@ -68,7 +68,7 @@ public class MemberController {
 			HttpSession session = request.getSession();		
 			session.setAttribute("memberId"   , memberDTO.getMemberId());
 			session.setAttribute("role"       , "client");
-			//session.setAttribute("myOrderCnt" , memberService.getMyOrderCnt(memberDTO.getMemberId()));
+			session.setAttribute("myOrderCnt" , memberService.getMyOrderCnt(memberDTO.getMemberId()));
 			//session.setAttribute("myCartCnt"  , memberService.getMyCartCnt(memberDTO.getMemberId()));
 			session.setMaxInactiveInterval(60 * 30);
 			

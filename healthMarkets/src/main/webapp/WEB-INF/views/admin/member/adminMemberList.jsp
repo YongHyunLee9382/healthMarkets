@@ -9,6 +9,24 @@
 	function gerateMemberExcelExport() {
 		location.href = "${contextPath}/admin/member/memberExcelExport";
 	}
+	
+	$().ready(function(){
+		
+		$("#onePageViewCnt").val("${onePageViewCnt}");
+		$("#searchKeyword").val("${searchKeyword}");
+		
+	});
+	
+	function getMemberList() {
+		
+		var url = "${contextPath }/admin/member/adminMemberList"
+		    url += "?searchKeyword=" +  $("#searchKeyword").val();
+		    url += "&searchWord=" + $("#searchWord").val() 
+		    url += "&onePageViewCnt=" + $("#onePageViewCnt").val();
+		
+		location.href = url;
+	
+	}
 </script>
 </head>
 <body>
@@ -39,6 +57,19 @@
                     <div class="shop__cart__table">
                         <table>
                             <thead>
+	                            <tr>
+									<td> 
+										조회 : <span style="color:red">${allMemberCnt}</span>개
+									</td>
+									<td colspan="4" align="right" >
+										<select id="onePageViewCnt" onchange="getGoodsList()" >
+											<option value="total">전체</option>
+											<option>5</option>
+											<option>7</option>
+											<option>10</option>
+										</select>
+									</td>
+								</tr>
                                 <tr>
                                     <th width="10%">번호</th>
                                     <th width="30%">회원아이디</th>
@@ -72,8 +103,30 @@
 		                            	</c:forEach>
                             		</c:otherwise>
                             	</c:choose>
+                            	<tr>
+									<td colspan="5" align="center">			
+										<select id="searchKeyword">
+											<option value="total">전체검색</option>
+											<option value="memberNm">회원명</option>
+											<option value="memberId">회원아이디</option>
+										</select>
+										<input type="text" id="searchWord" name="searchWord" value="${searchWord }">
+										<input type="button" value="검색" onclick="getMemberList()">
+									</td>
+								</tr>
                             </tbody>
                         </table>
+                        <div style="display: table; margin-left: auto; margin-right: auto">
+							<c:if test="${startPage > 3}">
+								<a href="${contextPath }/admin/member/adminMemberList?currentPageNumber=${startPage - 3}&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}" >이전 </a> 
+							</c:if>
+							<c:forEach var="i" begin="${startPage }" end="${endPage }">
+								<a href="${contextPath }/admin/member/adminMemberList?currentPageNumber=${i }&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}">${i } &nbsp;</a>
+							</c:forEach>
+							<c:if test="${endPage != allPageCnt && endPage >= 3}">
+								<a href="${contextPath }/admin/member/adminMemberList?currentPageNumber=${startPage + 3}&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}"> 다음 </a>
+							</c:if>
+						</div>
                     </div>
                 </div>
             </div>

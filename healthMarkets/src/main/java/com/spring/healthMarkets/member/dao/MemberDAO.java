@@ -1,5 +1,8 @@
 package com.spring.healthMarkets.member.dao;
 
+import java.util.List;
+
+import com.spring.healthMarkets.contact.dto.ContactDTO;
 import com.spring.healthMarkets.member.dto.MemberDTO;
 
 public interface MemberDAO {
@@ -15,4 +18,9 @@ public interface MemberDAO {
 	
 	public void updatePasswd(MemberDTO memberDTO)throws Exception;
 	
+	public List<MemberDTO> selectListDailyNewMember(String today) throws Exception;
+	
+	public int selectMyOrderCnt(String memberId) throws Exception;
+	
+	//public int selectMyCartCnt(String memberId) throws Exception;
 }

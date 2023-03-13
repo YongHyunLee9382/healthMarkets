@@ -87,4 +87,22 @@
   				MEMBER_ID = #{memberId}
   				
   	</update>
+  	
+  	<select id="selectListDailyNewMember" resultType="MemberDTO">
+		SELECT
+				*
+		FROM
+				MEMBER
+		WHERE
+				LEFT(JOIN_DT , 10) = #{today}
+	</select>
+	
+	<select id="selectMyOrderCnt" resultType="int" parameterType="String">
+	  		SELECT
+	  				COUNT(*)
+	  		FROM
+	  				`ORDER`
+	  		WHERE
+	  				MEMBER_ID = #{memberId}
+  	</select>
 </mapper>

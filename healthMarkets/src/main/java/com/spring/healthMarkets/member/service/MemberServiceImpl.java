@@ -1,10 +1,15 @@
 package com.spring.healthMarkets.member.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.spring.healthMarkets.contact.dto.ContactDTO;
 import com.spring.healthMarkets.member.dao.MemberDAO;
 import com.spring.healthMarkets.member.dto.MemberDTO;
 
@@ -65,5 +70,22 @@ public class MemberServiceImpl implements MemberService {
 		
 		
 		return isCheck;
+	}
+	
+	@Override
+	@Scheduled(cron="00 10 16 * * *")
+	public void getDailyNewMemberList() throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		List<MemberDTO> dailyNewMemberList =  memberDAO.selectListDailyNewMember(sdf.format(new Date()));
+		System.out.println("- 오늘 회원 가입 수 - ");
+		for (MemberDTO memberDTO : dailyNewMemberList) {
+			System.out.println(memberDTO);
+		}
+		
+	}
+
+	@Override
+	public int getMyOrderCnt(String memberId) throws Exception {
+		return memberDAO.selectMyOrderCnt(memberId);
 	}
 }

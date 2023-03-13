@@ -35,6 +35,24 @@
 			$("[name='contactCd']").prop("checked" , false);
 		}
 	}	
+	$().ready(function(){
+		
+		$("#onePageViewCnt").val("${onePageViewCnt}");
+		$("#searchKeyword").val("${searchKeyword}");
+		
+	});
+	
+	function getContactList() {
+		
+		var url = "${contextPath }/admin/contact/contactList"
+		    url += "?searchKeyword=" +  $("#searchKeyword").val();
+		    url += "&searchWord=" + $("#searchWord").val() 
+		    url += "&onePageViewCnt=" + $("#onePageViewCnt").val();
+		
+		location.href = url;
+	
+	}
+	
 	
 </script>
 </head>
@@ -64,6 +82,19 @@
                     	<br>
                         <table>
                             <thead>
+                            	<tr>
+									<td> 
+										조회 : <span style="color:red">${allContactCnt}</span>개
+									</td>
+									<td colspan="4" align="right" >
+										<select id="onePageViewCnt" onchange="getContactList()" >
+											<option value="total">전체</option>
+											<option>5</option>
+											<option>7</option>
+											<option>10</option>
+										</select>
+									</td>
+								</tr>
                                 <tr>
                                     <th width="5%"></th>
                                     <th width="40%">제목</th>
@@ -84,7 +115,7 @@
 		                            		 <tr>
 		                            		 	<td><input type="checkbox" name="contactCd" value="${contactDTO.contactCd }"></td>
                                     			<td class="cart__product__item">
-		                                            <h6><a href="${contextPath }/admin/contact/contactDetail?contactCd=${contactDTO.contactCd}">${contactDTO.content }</a></h6>
+		                                            <h6><a href="${contextPath }/admin/contact/contactDetail?contactCd=${contactDTO.contactCd}">${contactDTO.subject }</a></h6>
 			                                    </td>
 			                                    <td>${contactDTO.name }</td>
 			                                    <td>${contactDTO.email }</td>
@@ -93,8 +124,29 @@
 		                            	</c:forEach>
                             		</c:otherwise>
                             	</c:choose>
+                            	<tr>
+									<td colspan="5" align="center">			
+										<select id="searchKeyword">
+											<option value="total">전체검색</option>
+											<option value="subject">제목</option>
+										</select>
+										<input type="text" id="searchWord" name="searchWord" value="${searchWord }">
+										<input type="button" value="검색" onclick="getContactList()">
+									</td>
+								</tr>
                             </tbody>
                         </table>
+                        <div style="display: table; margin-left: auto; margin-right: auto">
+							<c:if test="${startPage > 3}">
+								<a href="${contextPath }/admin/contact/contactList?currentPageNumber=${startPage - 3}&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}" >이전 </a> 
+							</c:if>
+							<c:forEach var="i" begin="${startPage }" end="${endPage }">
+								<a href="${contextPath }/admin/contact/contactList?currentPageNumber=${i }&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}">${i } &nbsp;</a>
+							</c:forEach>
+							<c:if test="${endPage != allPageCnt && endPage >= 3}">
+								<a href="${contextPath }/admin/contact/contactList?currentPageNumber=${startPage + 3}&onePageViewCnt=${onePageViewCnt  }&searchKeyword=${searchKeyword }&searchWord=${searchWord}"> 다음 </a>
+							</c:if>
+						</div>
                     </div>
                 </div>
             </div>
