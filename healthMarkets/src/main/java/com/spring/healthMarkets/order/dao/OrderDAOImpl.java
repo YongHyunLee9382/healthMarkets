@@ -1,5 +1,6 @@
 package com.spring.healthMarkets.order.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -34,5 +35,10 @@ public class OrderDAOImpl implements OrderDAO {
 	public void insertOrder(OrderDTO orderDTO) throws Exception {
 		sqlSession.insert("order.insertOrder" , orderDTO);
 		
+	}
+
+	@Override
+	public List<GoodsDTO> selectListCartGoods(int[] productCdList) throws Exception {
+		return sqlSession.selectList("order.selectListCartGoods" , productCdList);
 	}
 }

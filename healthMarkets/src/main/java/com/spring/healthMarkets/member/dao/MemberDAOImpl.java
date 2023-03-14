@@ -60,4 +60,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public int selectMyOrderCnt(String memberId) throws Exception {
 		return sqlSession.selectOne("member.selectMyOrderCnt" , memberId);
 	}
+
+	@Override
+	public int selectMyCartCnt(String memberId) throws Exception {
+		return sqlSession.selectOne("member.selectMyCartCnt" , memberId);
+	}
 }

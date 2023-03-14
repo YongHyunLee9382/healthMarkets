@@ -88,4 +88,10 @@ public class MemberServiceImpl implements MemberService {
 	public int getMyOrderCnt(String memberId) throws Exception {
 		return memberDAO.selectMyOrderCnt(memberId);
 	}
+
+	@Override
+	public int getMyCartCnt(String memberId) throws Exception {
+		
+		return memberDAO.selectMyCartCnt(memberId);
+	}
 }

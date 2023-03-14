@@ -1,6 +1,7 @@
 package com.spring.healthMarkets.order.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,11 @@ public class OrderServiceImpl implements OrderService {
 		
 		orderDAO.updateMemberPoint(orderMap);
 		orderDAO.insertOrder(orderDTO);
+	}
+
+	@Override
+	public List<GoodsDTO> getGoodsListByCart(int[] productCdList) throws Exception {
+		return orderDAO.selectListCartGoods(productCdList);
 	}
 	
 }

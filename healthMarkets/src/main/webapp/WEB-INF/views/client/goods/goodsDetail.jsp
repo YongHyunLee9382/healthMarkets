@@ -21,7 +21,7 @@
 			$.ajax({
 				url : "${contextPath }/myPage/addCart",
 				method : "get",
-				data : {"productCd" : productCd , "cartGoodsQty" : $("#orderGoodsQty").val()},
+				data : {"productCd" : productCd , "orderGoodsQty" : $("#orderGoodsQty").val()},
 				success : function(result) {
 					
 					if (result == "duple") {

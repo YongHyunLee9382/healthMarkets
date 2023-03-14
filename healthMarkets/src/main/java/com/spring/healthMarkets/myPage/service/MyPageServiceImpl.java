@@ -1,11 +1,15 @@
 package com.spring.healthMarkets.myPage.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
 import com.spring.healthMarkets.member.dto.MemberDTO;
 import com.spring.healthMarkets.myPage.dao.MyPageDAO;
+import com.spring.healthMarkets.myPage.dto.CartDTO;
 
 
 
@@ -36,4 +40,38 @@ public class MyPageServiceImpl implements MyPageService {
 		myPageDAO.updateMyInfo(memberDTO);
 		
 	}
+
+	@Override
+	public boolean checkDuplicatedCart(CartDTO cartDTO) throws Exception {
+		if (myPageDAO.selectOneDuplicatedCart(cartDTO) == null) return false;
+		else												    return true; 
+	}
+
+	@Override
+	public void addCart(CartDTO cartDTO) throws Exception {
+		myPageDAO.insertCart(cartDTO);
+	}
+
+	@Override
+	public List<Map<String, Object>> getMyCartList(String memberId) throws Exception {
+		return myPageDAO.selectListMyCart(memberId);
+	}
+
+	@Override
+	public int countCartList(String memberId) throws Exception {
+		return myPageDAO.selectCountMyCart(memberId);
+	}
+
+	@Override
+	public void removeCart(int[] deleteCartCdList) throws Exception {
+		myPageDAO.deleteCart(deleteCartCdList);
+	}
+
+	@Override
+	public void modifyOrderGoodsQty(Map<String, Object> updateMap) throws Exception {
+		myPageDAO.updateOrderGoodsQty(updateMap);
+		
+	}
+
+	
 }

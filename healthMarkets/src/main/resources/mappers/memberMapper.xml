@@ -105,4 +105,13 @@
 	  		WHERE
 	  				MEMBER_ID = #{memberId}
   	</select>
+  	
+  	<select id="selectMyCartCnt" resultType="int" parameterType="String">
+	  		SELECT
+	  				COUNT(*)
+	  		FROM
+	  				CART
+	  		WHERE
+	  				MEMBER_ID = #{memberId}
+  	</select>
 </mapper>

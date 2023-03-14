@@ -79,4 +79,19 @@
 		WHERE
 				MEMBER_ID = #{memberId}
 	</update>
+	
+	<select id="selectListCartGoods" resultType="GoodsDTO">
+		SELECT
+				*
+		FROM
+				GOODS G
+		    JOIN CART C
+			  	   ON G.PRODUCT_CD = C.PRODUCT_CD	
+				  AND G.PRODUCT_CD IN
+						<foreach collection="array" item="productCd" separator="," open="(" close=")" >
+							#{productCd}
+						</foreach> 
+		ORDER BY
+				C.ENROLL_DT DESC
+	</select>
 </mapper>

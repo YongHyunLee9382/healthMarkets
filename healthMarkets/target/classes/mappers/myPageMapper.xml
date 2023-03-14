@@ -65,4 +65,94 @@
 				MEMBER_ID = #{memberId}
 	</update>
 	
+	<select id="selectOneDuplicatedCart" parameterType="hashmap" resultType="CartDTO">
+		SELECT
+				*
+		FROM
+				CART
+		WHERE
+				MEMBER_ID = #{memberId} AND
+				PRODUCT_CD = #{productCd}
+	</select>
+	
+	<insert id="insertCart" parameterType="CartDTO">
+		INSERT INTO
+			CART (PRODUCT_CD,
+				  ORDER_GOODS_QTY,
+				  MEMBER_ID,
+				  ENROLL_DT
+		)
+		VALUES (
+				#{productCd},
+				#{orderGoodsQty},
+				#{memberId},
+				NOW()
+		)
+	</insert>
+	
+	<resultMap type="hashmap" id="cartMap">
+  		<result column="CART_CD"     	  property="cartCd"/>
+  		<result column="MEMBER_ID"    	  property="memberId"/>
+  		<result column="ORDER_GOODS_QTY"   property="orderGoodsQty"/>
+  		<result column="ENROLL_DT"   	  property="enrollDt"/>
+  		<result column="PRODUCT_CD" 		  property="productCd"/>
+  		<result column="PRODUCT_NM"   	  property="productNm"/>
+  		<result column="PRICE"   	  	  property="price"/>
+  		<result column="DISCOUNT_RT"    property="discountRt"/>
+  		<result column="POINT"      	  property="point"/>
+  		<result column="PRODUCT_FILE_NAME"  property="productFileName"/>
+  	</resultMap>
+	
+	<select id="selectListMyCart" parameterType="String" resultMap="cartMap">
+		SELECT
+				C.CART_CD	  	   		AS CART_CD,
+				C.MEMBER_ID        		AS MEMBER_ID,
+				C.ORDER_GOODS_QTY   	AS ORDER_GOODS_QTY,
+				C.ENROLL_DT		   		AS ENROLL_DT,
+				G.PRODUCT_CD  	   		AS PRODUCT_CD,
+				G.PRODUCT_NM		    AS PRODUCT_NM,
+				G.PRICE    		   		AS PRICE,
+				G.DISCOUNT_RT    		AS DISCOUNT_RT,
+				G.POINT			  		AS POINT,
+				G.PRODUCT_FILE_NAME  	AS PRODUCT_FILE_NAME
+		FROM
+				CART C
+		  JOIN GOODS G
+		  		  ON C.PRODUCT_CD = G.PRODUCT_CD			
+		WHERE
+				C.MEMBER_ID = #{memberId}
+		ORDER BY
+				C.ENROLL_DT DESC
+	</select>
+	
+	
+	<select id="selectCountMyCart" parameterType="String" resultType="int">
+		SELECT
+				COUNT(*)
+		FROM
+				CART
+		WHERE
+				MEMBER_ID = #{memberId}
+	</select>
+	
+	<delete id="deleteCart" >
+		
+		DELETE FROM
+				CART
+		WHERE
+				CART_CD IN 
+		<foreach collection="array" item="cartCd" separator="," open="("  close=")" >
+				#{cartCd}
+		</foreach>
+		
+	</delete>
+  
+  	<update id="updateOrderGoodsQty" parameterType="hashmap" >
+		UPDATE
+				CART
+		SET
+				ORDER_GOODS_QTY = #{orderGoodsQty}
+		WHERE
+				CART_CD = #{cartCd}
+	</update>
 </mapper>	

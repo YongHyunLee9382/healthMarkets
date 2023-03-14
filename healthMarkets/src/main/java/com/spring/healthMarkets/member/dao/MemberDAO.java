@@ -22,5 +22,5 @@ public interface MemberDAO {
 	
 	public int selectMyOrderCnt(String memberId) throws Exception;
 	
-	//public int selectMyCartCnt(String memberId) throws Exception;
+	public int selectMyCartCnt(String memberId) throws Exception;
 }

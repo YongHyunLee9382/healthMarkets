@@ -50,8 +50,8 @@
                             		<li><a href="${contextPath }/goods/goodsList?sort=all&part=all">Shop</a></li>
                             		<li><a href="#">Pages</a>
                                 	<ul class="dropdown">
-                                    	<li><a href="#">Shop Cart</a></li>
-                                    	<li><a href="${contextPath}/myPage/myInfo?memberId=${sessionScope.memberId}">MyPage</a></li>
+                                    	<li><a href="${contextPath }/myPage/myCartList">My Cart</a></li>
+                                    	<li><a href="${contextPath}/myPage/myInfo?memberId=${sessionScope.memberId}">My Page</a></li>
                                 	</ul>
                             		</li>
                             <c:choose>

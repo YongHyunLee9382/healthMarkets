@@ -1,5 +1,6 @@
 package com.spring.healthMarkets.order.dao;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -15,5 +16,7 @@ public interface OrderDAO {
 	public void updateMemberPoint(Map<String,Object> orderMap) throws Exception;
 	
 	public void insertOrder(OrderDTO orderDTO) throws Exception;
+	
+	public List<GoodsDTO> selectListCartGoods(int[] goodsCdList) throws Exception;
 	
 }

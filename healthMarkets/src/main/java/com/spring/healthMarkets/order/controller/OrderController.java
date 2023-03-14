@@ -62,4 +62,35 @@ public class OrderController {
 		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
 		
 	}
+	@GetMapping("/orderCartGoods")
+	public ModelAndView orderCartGoods(@RequestParam("productCdList") String productCds , 
+									   @RequestParam("orderGoodsQtyList") String orderGoodsQtyList , 
+									   @RequestParam("cartCdList") String cartCdList ,
+									   HttpServletRequest request) throws Exception{
+		
+		String[] temp = productCds.split(",");
+		int[] productCdList = new int[temp.length];
+		
+		for (int i = 0; i < productCdList.length; i++) {
+			productCdList[i] = Integer.parseInt(temp[i]);
+		}
+		
+		ModelAndView mv = new ModelAndView();  			
+		mv.setViewName("/order/orderCartGoods");
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("myOrderCnt" , memberService.getMyOrderCnt((String)session.getAttribute("memberId")));
+		session.setAttribute("myCartCnt" , memberService.getMyCartCnt((String)session.getAttribute("memberId")));
+		
+		
+		mv.addObject("orderer"           , orderService.getOrdererDetail((String)session.getAttribute("memberId")));
+		mv.addObject("goodsList"         , orderService.getGoodsListByCart(productCdList));
+		mv.addObject("orderGoodsQtyList" , orderGoodsQtyList);
+		mv.addObject("productCdList"       , productCds);
+		mv.addObject("cartCdList"        , cartCdList);
+		
+		return mv;
+		
+	}
+	
 }
