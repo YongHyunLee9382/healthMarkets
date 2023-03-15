@@ -94,4 +94,74 @@
 		ORDER BY
 				C.ENROLL_DT DESC
 	</select>
+	
+	<insert id="insertOrderByCart">
+		INSERT INTO `ORDER` (
+			    MEMBER_ID,
+			    PRODUCT_CD,
+				ORDER_GOODS_QTY,
+				PAYMENT_AMT,
+			    ORDERER_NM,
+			    ORDERER_HP,
+			    RECEIVER_NM,
+				RECEIVER_HP,
+				ZIPCODE,
+				ROAD_ADDRESS,
+				JIBUN_ADDRESS,
+				NAMUJI_ADDRESS,
+				DELIVERY_METHOD,
+				DELIVERY_MESSAGE,
+			    DELIVERY_STATUS,
+				GIFT_WRAPPING,
+				PAY_METHOD,
+				PAY_ORDERER_HP,
+				CARD_COMPANY_NM,
+			    CARD_PAY_MONTH,
+				PAY_ORDER_TIME
+		)
+		VALUES 
+			<foreach collection="list" item="orderDTO" separator=",">
+				(
+				    #{orderDTO.memberId},
+				    #{orderDTO.productCd},
+				    #{orderDTO.orderGoodsQty},
+				    #{orderDTO.paymentAmt},
+				    #{orderDTO.ordererNm},
+	                #{orderDTO.ordererHp},
+				    #{orderDTO.receiverNm},
+				    #{orderDTO.receiverHp},
+				    #{orderDTO.zipcode},
+				    #{orderDTO.roadAddress},
+				    #{orderDTO.jibunAddress},
+				    #{orderDTO.namujiAddress},
+	                #{orderDTO.deliveryMethod},
+	                #{orderDTO.deliveryMessage},
+	                '배송준비중',
+	                #{orderDTO.giftWrapping},
+	                #{orderDTO.payMethod},
+	                #{orderDTO.payOrdererHp},
+	                #{orderDTO.cardCompanyNm},
+	                #{orderDTO.cardPayMonth},
+	                NOW()
+		       )
+			</foreach> 
+	</insert>
+	<update id="updateMemberPointByCart" parameterType="hashmap">
+		UPDATE
+				MEMBER
+		SET
+				POINT = POINT + #{point}
+		WHERE
+				MEMBER_ID = #{memberId}
+	</update>
+	
+	<delete id="deleteCartByOrder" >
+		DELETE FROM 
+				CART
+		WHERE
+				CART_CD IN
+				<foreach collection="array" item="cartCd" separator="," open="(" close=")" >
+					#{cartCd}
+				</foreach> 
+	</delete>
 </mapper>

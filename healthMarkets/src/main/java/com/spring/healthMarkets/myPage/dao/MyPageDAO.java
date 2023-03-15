@@ -24,4 +24,12 @@ public interface MyPageDAO {
 	public void deleteCart(int[] deleteCartCdList) throws Exception;
 	
 	public void updateOrderGoodsQty(Map<String,Object> updateMap) throws Exception;
+	
+	public List<Map<String,Object>> selectListMyOrder(String memberId) throws Exception;
+	
+	public void deleteCartListByRemoveMember(String memberId) throws Exception;
+	
+	public void deleteOrderListByRemoveMember(String memberId) throws Exception;
+	
+	
 }

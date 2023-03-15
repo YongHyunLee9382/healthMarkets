@@ -28,8 +28,8 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public void removeMember(String memberId) throws Exception {
 		myPageDAO.deleteMember(memberId);
-		//myPageDAO.deleteCartListByRemoveMember(memberId);
-		//myPageDAO.deleteOrderListByRemoveMember(memberId);
+		myPageDAO.deleteCartListByRemoveMember(memberId);
+		myPageDAO.deleteOrderListByRemoveMember(memberId);
 		
 	}
 
@@ -71,6 +71,11 @@ public class MyPageServiceImpl implements MyPageService {
 	public void modifyOrderGoodsQty(Map<String, Object> updateMap) throws Exception {
 		myPageDAO.updateOrderGoodsQty(updateMap);
 		
+	}
+
+	@Override
+	public List<Map<String, Object>> getMyOrderList(String memberId) throws Exception {
+		return myPageDAO.selectListMyOrder(memberId);
 	}
 
 	

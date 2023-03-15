@@ -155,4 +155,48 @@
 		WHERE
 				CART_CD = #{cartCd}
 	</update>
+	
+	<delete id="deleteCartListByRemoveMember" parameterType="String">
+		DELETE FROM
+				CART
+		WHERE
+				MEMBER_ID = #{memberId}
+	</delete>
+	
+	<delete id="deleteOrderListByRemoveMember" parameterType="String">
+		DELETE FROM
+				`ORDER`
+		WHERE
+				MEMBER_ID = #{memberId}
+	</delete>
+	
+	<resultMap type="hashmap" id="myOrderListMap">
+		<result column="ORDER_CD" 		 property="orderCd"/>
+		<result column="MEMBER_ID" 		 property="memberId"/>
+		<result column="ORDER_GOODS_QTY" property="orderGoodsQty"/>
+		<result column="PAYMENT_AMT" 	 property="paymentAmt"/>
+		<result column="PAY_ORDER_TIME"  property="payOrderTime"/>
+		<result column="PRODUCT_CD" 		 property="productCd"/>
+		<result column="PRODUCT_NM" 		 property="productNm"/>
+		<result column="PRICE" 		 	 property="price"/>
+		<result column="PRODUCT_FILE_NAME" property="productFileName"/>
+	</resultMap>
+
+	<select id="selectListMyOrder" parameterType="String" resultMap="myOrderListMap">
+		SELECT
+				O.ORDER_CD 		  	AS ORDER_CD,
+				O.MEMBER_ID			AS MEMBER_ID,
+		        O.ORDER_GOODS_QTY 	AS ORDER_GOODS_QTY,
+		        O.PAYMENT_AMT 		AS PAYMENT_AMT,
+		        O.PAY_ORDER_TIME  	AS PAY_ORDER_TIME,
+		        G.PRODUCT_CD  	  	AS PRODUCT_CD,
+		        G.PRODUCT_NM  	  	AS PRODUCT_NM,
+		        G.PRICE				AS PRICE,
+		        G.PRODUCT_FILE_NAME 	AS PRODUCT_FILE_NAME
+		FROM
+				`ORDER` O
+			JOIN GOODS  G
+				    ON  O.PRODUCT_CD = G.PRODUCT_CD
+				   AND  O.MEMBER_ID = #{memberId}
+	</select>
 </mapper>	

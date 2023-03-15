@@ -19,4 +19,10 @@ public interface OrderDAO {
 	
 	public List<GoodsDTO> selectListCartGoods(int[] goodsCdList) throws Exception;
 	
+	public void updateMemberPointByCart(Map<String,Object> memberMap) throws Exception;
+	
+	public void insertOrderByCart(List<OrderDTO> orderList) throws Exception;
+	
+	public void deleteCartByOrder(int[] cartCdList)  throws Exception;
+	
 }

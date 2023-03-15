@@ -2,7 +2,7 @@ package com.spring.healthMarkets.order.service;
 
 
 import java.util.List;
-
+import java.util.Map;
 
 import com.spring.healthMarkets.goods.dto.GoodsDTO;
 import com.spring.healthMarkets.member.dto.MemberDTO;
@@ -15,5 +15,8 @@ public interface OrderService {
 	
 	public void addOrder(OrderDTO orderDTO, int point) throws Exception;
 	
-	public List<GoodsDTO> getGoodsListByCart(int[] goodsCdList) throws Exception;
+	public List<GoodsDTO> getGoodsListByCart(int[] productCdList) throws Exception;
+	
+	public void addOrderByCart(Map<String,String> orderListMap)  throws Exception;
+	
 }

@@ -41,4 +41,19 @@ public class OrderDAOImpl implements OrderDAO {
 	public List<GoodsDTO> selectListCartGoods(int[] productCdList) throws Exception {
 		return sqlSession.selectList("order.selectListCartGoods" , productCdList);
 	}
+
+	@Override
+	public void updateMemberPointByCart(Map<String, Object> memberMap) throws Exception {
+		sqlSession.update("order.updateMemberPointByCart" , memberMap);
+	}
+
+	@Override
+	public void insertOrderByCart(List<OrderDTO> orderList) throws Exception {
+		sqlSession.insert("order.insertOrderByCart" , orderList);
+	}
+
+	@Override
+	public void deleteCartByOrder(int[] cartCdList) throws Exception {
+		sqlSession.insert("order.deleteCartByOrder" , cartCdList);
+	}
 }

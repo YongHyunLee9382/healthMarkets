@@ -23,13 +23,13 @@
 			$("#orderGoodsQty"+i).val(orderGoodsQtyList[i] );
 			
 			var price = Number($("#price"+i).val());
-			var discountRate = Number($("#discountRate"+i).val());
+			var discountRt = Number($("#discountRt"+i).val());
 			var orderGoodsQty = Number($("#orderGoodsQty"+i).val());
 			var deliveryPrice =  Number($("#deliveryPrice"+i).val());
 			
-			viewPaymentAmt += (price - parseInt(price * (discountRate / 100))) * orderGoodsQty + deliveryPrice;
+			viewPaymentAmt += (price - parseInt(price * (discountRt / 100))) * orderGoodsQty + deliveryPrice;
 			
-			paymentAmtList += (price - parseInt(price * (discountRate / 100))) * orderGoodsQty + deliveryPrice;
+			paymentAmtList += (price - parseInt(price * (discountRt / 100))) * orderGoodsQty + deliveryPrice;
 			paymentAmtList += ",";
 		
 			totalDeliveryPrice += deliveryPrice;
@@ -80,7 +80,7 @@
                                     </li>
                                      <c:set var="point" value="0"/>
                                     <c:forEach var="goodsDTO" items="${goodsList }" varStatus="i">
-                                     <c:set var="point" value="${point + goodsDTO.point }"/>
+                                     <c:set var="point" value="${point + goodsDTO.point }"/>                               
                                      <li>
                                      	${i.index + 1}.&nbsp; ${goodsDTO.productNm } 
                                       <span id="qty${i.index }"></span>
@@ -91,10 +91,9 @@
                                       <input type="hidden" id="deliveryPrice${i.index }" value="${goodsDTO.deliveryPrice}" />
                                       <input type="hidden" id="point${i.index }" value="${goodsDTO.point}" />
                                      </li>
-                                     <c:set var="deliveryPrice" value="${deliveryPrice = deliveryPrice + goodsDTO.deliveryPrice }" />
                                     </c:forEach>
                                     <br>
-		                            <li>DeliveryPrice<span id="totalDeliveryPrice"></span>${deliveryPrice}원 </li>
+		                            <li>DeliveryPrice<span id="totalDeliveryPrice"></span></li>
 		                            <li>Point <span id="totalPoint"></span></li>
                                 </ul>
                                 <input type="hidden" name="productCdList" value="${productCdList }">

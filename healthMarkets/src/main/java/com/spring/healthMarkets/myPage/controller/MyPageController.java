@@ -155,4 +155,17 @@ public class MyPageController {
 		myPageService.modifyOrderGoodsQty(updateMap);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
+	
+	@GetMapping("/myOrderList")
+	public ModelAndView myOrderList(HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/myPage/myOrderList");
+		mv.addObject("myOrderList" , myPageService.getMyOrderList((String)session.getAttribute("memberId")));
+		
+		return mv;
+		
+	}
 }

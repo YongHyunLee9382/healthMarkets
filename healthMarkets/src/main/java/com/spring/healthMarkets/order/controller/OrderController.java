@@ -1,5 +1,7 @@
 package com.spring.healthMarkets.order.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.healthMarkets.member.service.MemberService;
+import com.spring.healthMarkets.myPage.service.MyPageService;
 import com.spring.healthMarkets.order.dto.OrderDTO;
 import com.spring.healthMarkets.order.service.OrderService;
 
@@ -26,6 +29,9 @@ public class OrderController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MyPageService myPageService;
 
 	
 	@GetMapping("/orderGoods")
@@ -88,9 +94,31 @@ public class OrderController {
 		mv.addObject("orderGoodsQtyList" , orderGoodsQtyList);
 		mv.addObject("productCdList"       , productCds);
 		mv.addObject("cartCdList"        , cartCdList);
+		mv.addObject("cartList"			,  myPageService.getMyCartList((String)session.getAttribute("memberId")));
 		
 		return mv;
 		
+	}
+	@PostMapping("/orderCartGoods")
+	public ResponseEntity<Object> orderCartGoods(@RequestParam Map<String, String> orderListMap , HttpServletRequest request) throws Exception{
+		
+		orderService.addOrderByCart(orderListMap);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("myOrderCnt" , memberService.getMyOrderCnt(orderListMap.get("memberId")));
+		session.setAttribute("myCartCnt"  , memberService.getMyCartCnt(orderListMap.get("memberId")));
+
+		
+		String jsScript = "<script>";
+			   jsScript += "alert('상품을 주문하였습니다.');";
+			   jsScript += "location.href='" + request.getContextPath() + "/myPage/myOrderList'";
+			   jsScript +="</script>";
+		
+		
+		 HttpHeaders responseHeaders = new HttpHeaders();
+		 responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+			
+		 return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
 	}
 	
 }

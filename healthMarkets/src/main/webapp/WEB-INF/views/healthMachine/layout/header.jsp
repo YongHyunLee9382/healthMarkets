@@ -52,6 +52,7 @@
                                 	<ul class="dropdown">
                                     	<li><a href="${contextPath }/myPage/myCartList">My Cart</a></li>
                                     	<li><a href="${contextPath}/myPage/myInfo?memberId=${sessionScope.memberId}">My Page</a></li>
+                                    	<li><a href="${contextPath }/myPage/myOrderList">My Order</a></li>
                                 	</ul>
                             		</li>
                             <c:choose>
@@ -92,7 +93,7 @@
                         </c:choose>
                         <ul class="header__right__widget">	
                             <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span>
+                            <li><a href="${contextPath }/myPage/myCartList"><span class="icon_heart_alt"></span>
                         		<c:choose>
                                 	<c:when test="${sessionScope.role == 'client'}">
 		                                <div class="tip">${sessionScope.myCartCnt }</div>

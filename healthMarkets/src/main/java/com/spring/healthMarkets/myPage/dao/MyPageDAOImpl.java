@@ -68,5 +68,22 @@ public class MyPageDAOImpl implements MyPageDAO {
 		sqlSession.update("myPage.updateOrderGoodsQty" , updateMap);
 		
 	}
+
+	@Override
+	public List<Map<String, Object>> selectListMyOrder(String memberId) throws Exception {
+		return sqlSession.selectList("myPage.selectListMyOrder" , memberId);
+	}
+
+	@Override
+	public void deleteCartListByRemoveMember(String memberId) throws Exception {
+		sqlSession.delete("myPage.deleteCartListByRemoveMember" , memberId);
+		
+	}
+
+	@Override
+	public void deleteOrderListByRemoveMember(String memberId) throws Exception {
+		sqlSession.delete("myPage.deleteOrderListByRemoveMember" , memberId);
+		
+	}
 	
 }

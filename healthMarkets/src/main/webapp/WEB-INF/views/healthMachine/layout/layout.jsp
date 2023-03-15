@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="${contextPath }/resources/ashion-master/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="${contextPath }/resources/ashion-master/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${contextPath }/resources/ashion-master/css/style.css" type="text/css">
-    <script src="${contextPath}/resources/bootstrap/js/jquery-3.3.1.min.js"></script>
+    <script src="${contextPath}/resources/ashion-master/js/jquery-3.3.1.min.js"></script>
 	<script src="${contextPath}/resources/ckeditor/ckeditor.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
