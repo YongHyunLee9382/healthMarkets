@@ -168,4 +168,16 @@ public class MyPageController {
 		return mv;
 		
 	}
+	
+	@GetMapping("/myOrderDetail")
+	public ModelAndView myOrderDetail(@RequestParam Map<String, Object> orderDetailMap) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("/myPage/myOrderDetail");
+		mv.addObject("myOrder" , myPageService.getMyOrderDetail(orderDetailMap));
+		
+		return mv;
+		
+	}
 }

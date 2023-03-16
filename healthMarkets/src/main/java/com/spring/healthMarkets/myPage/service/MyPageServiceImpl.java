@@ -78,5 +78,10 @@ public class MyPageServiceImpl implements MyPageService {
 		return myPageDAO.selectListMyOrder(memberId);
 	}
 
+	@Override
+	public Map<String, Object> getMyOrderDetail(Map<String, Object> orderDetailMap) throws Exception {
+		return myPageDAO.selectOneMyOrder(orderDetailMap);
+	}
+
 	
 }

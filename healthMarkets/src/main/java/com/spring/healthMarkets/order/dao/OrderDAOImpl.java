@@ -56,4 +56,10 @@ public class OrderDAOImpl implements OrderDAO {
 	public void deleteCartByOrder(int[] cartCdList) throws Exception {
 		sqlSession.insert("order.deleteCartByOrder" , cartCdList);
 	}
+
+	@Override
+	public List<OrderDTO> selectListDailyNewOrder(String today) throws Exception {
+		return sqlSession.selectList("order.selectListDailyNewOrder" , today);
+	}
+
 }

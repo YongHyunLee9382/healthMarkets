@@ -19,4 +19,6 @@ public interface OrderService {
 	
 	public void addOrderByCart(Map<String,String> orderListMap)  throws Exception;
 	
+	public void getDailyNewOrderList() throws Exception;
+	
 }

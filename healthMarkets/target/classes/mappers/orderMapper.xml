@@ -164,4 +164,13 @@
 					#{cartCd}
 				</foreach> 
 	</delete>
+	
+	<select id="selectListDailyNewOrder" resultType="OrderDTO">
+		SELECT
+				*
+		FROM
+				`ORDER`
+		WHERE
+				LEFT(PAY_ORDER_TIME , 10) = #{today}
+	</select>
 </mapper>

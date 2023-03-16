@@ -27,4 +27,6 @@ public interface MyPageService {
 	
 	public List<Map<String,Object>> getMyOrderList(String memberId) throws Exception;
 	
+	public Map<String,Object> getMyOrderDetail(Map<String,Object> orderDetailMap) throws Exception;
+	
 }

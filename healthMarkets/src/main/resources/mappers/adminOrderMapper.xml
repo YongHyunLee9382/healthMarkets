@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminOrder">
+
+	<resultMap type="hashmap" id="orderListMap">
+		<result column="ORDER_CD" 		 	property="orderCd"/>
+		<result column="ORDER_GOODS_QTY" 	property="orderGoodsQty"/>
+		<result column="PAY_ORDER_TIME"  	property="payOrderTime"/>
+		<result column="MEMBER_ID"  	 	property="memberId"/>
+		<result column="DELIVERY_STATUS"  	property="deliveryStatus"/>
+		<result column="PRODUCT_CD" 		property="productCd"/>
+		<result column="PRODUCT_NM" 	    property="productNm"/>
+		<result column="PRICE" 		 	 	property="price"/>
+		<result column="PRODUCT_FILE_NAME" 	property="productFileName"/>
+	</resultMap>
+
+	<select id="selectListOrder" resultMap="orderListMap">
+		SELECT
+				O.ORDER_CD 		  	AS ORDER_CD,
+		        O.ORDER_GOODS_QTY 	AS ORDER_GOODS_QTY,
+		        O.PAY_ORDER_TIME  	AS PAY_ORDER_TIME,
+		        O.MEMBER_ID			AS MEMBER_ID,
+		        O.DELIVERY_STATUS	AS DELIVERY_STATUS,
+		        G.PRODUCT_CD  	  	AS PRODUCT_CD,
+		        G.PRODUCT_NM  	  	AS PRODUCT_NM,
+		        G.PRICE				AS PRICE,
+		        G.PRODUCT_FILE_NAME 	AS PRODUCT_FILE_NAME
+		FROM
+				`ORDER` O
+				  JOIN  GOODS  G
+				    ON  O.PRODUCT_CD = G.PRODUCT_CD
+	</select>
+	
+	<resultMap type="hashmap" id="orderMapList">
+		<result column="ORDER_CD" 		 	property="orderCd"/>
+		<result column="ORDER_GOODS_QTY" 	property="orderGoodsQty"/>
+		<result column="PAY_ORDER_TIME"  	property="payOrderTime"/>
+		<result column="MEMBER_ID"  	 	property="memberId"/>
+		<result column="DELIVERY_STATUS"  	property="deliveryStatus"/>
+		<result column="PRODUCT_CD" 		property="productCd"/>
+		<result column="PRODUCT_NM" 	    property="productNm"/>
+		<result column="PRICE" 		 	 	property="price"/>
+		<result column="PRODUCT_FILE_NAME" 	property="productFileName"/>
+	</resultMap>
+	
+	
+	<select id="selectOrderList" resultMap="orderMapList" parameterType="hashmap">
+		<choose>
+			<when test='searchKeyword.equals("total")'>
+				<choose>
+					<when test='searchWord.equals("")'>
+						SELECT
+								O.ORDER_CD 		  	AS ORDER_CD,
+		        				O.ORDER_GOODS_QTY 	AS ORDER_GOODS_QTY,
+		        				O.PAY_ORDER_TIME  	AS PAY_ORDER_TIME,
+		        				O.MEMBER_ID			AS MEMBER_ID,
+		        				O.DELIVERY_STATUS	AS DELIVERY_STATUS,
+		        				G.PRODUCT_CD  	  	AS PRODUCT_CD,
+		        				G.PRODUCT_NM  	  	AS PRODUCT_NM,
+		        				G.PRICE				AS PRICE,
+		        				G.PRODUCT_FILE_NAME 	AS PRODUCT_FILE_NAME
+						FROM
+								`ORDER` O
+				  				JOIN  GOODS  G
+				    			ON  O.PRODUCT_CD = G.PRODUCT_CD
+						ORDER BY
+								PAY_ORDER_TIME DESC
+						LIMIT 
+								#{startBoardIdx},#{onePageViewCnt}
+					</when>
+					<otherwise>
+						SELECT
+								O.ORDER_CD 		  	AS ORDER_CD,
+		        				O.ORDER_GOODS_QTY 	AS ORDER_GOODS_QTY,
+		        				O.PAY_ORDER_TIME  	AS PAY_ORDER_TIME,
+		        				O.MEMBER_ID			AS MEMBER_ID,
+		        				O.DELIVERY_STATUS	AS DELIVERY_STATUS,
+		        				G.PRODUCT_CD  	  	AS PRODUCT_CD,
+		        				G.PRODUCT_NM  	  	AS PRODUCT_NM,
+		        				G.PRICE				AS PRICE,
+		        				G.PRODUCT_FILE_NAME 	AS PRODUCT_FILE_NAME
+						FROM
+								`ORDER` O
+				  				JOIN  GOODS  G
+				    			ON  O.PRODUCT_CD = G.PRODUCT_CD
+						WHERE
+								MEMBER_ID LIKE CONCAT('%' , #{searchWord} , '%') 
+						ORDER BY
+								PAY_ORDER_TIME DESC
+						LIMIT 
+								#{startBoardIdx},#{onePageViewCnt}
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+						SELECT
+								O.ORDER_CD 		  	AS ORDER_CD,
+		        				O.ORDER_GOODS_QTY 	AS ORDER_GOODS_QTY,
+		        				O.PAY_ORDER_TIME  	AS PAY_ORDER_TIME,
+		        				O.MEMBER_ID			AS MEMBER_ID,
+		        				O.DELIVERY_STATUS	AS DELIVERY_STATUS,
+		        				G.PRODUCT_CD  	  	AS PRODUCT_CD,
+		        				G.PRODUCT_NM  	  	AS PRODUCT_NM,
+		        				G.PRICE				AS PRICE,
+		        				G.PRODUCT_FILE_NAME 	AS PRODUCT_FILE_NAME
+						FROM
+								`ORDER` O
+				  				JOIN  GOODS  G
+				    			ON  O.PRODUCT_CD = G.PRODUCT_CD
+				WHERE
+					<if test='searchKeyword.equals("memberId")'>
+						MEMBER_ID LIKE CONCAT('%' , #{searchWord} , '%')
+					</if>
+				ORDER BY
+						PAY_ORDER_TIME DESC
+				LIMIT
+						#{startBoardIdx} , #{onePageViewCnt}
+			</otherwise>
+		</choose>		
+	</select>
+	
+	<select id="selectOneAllOrderCnt" parameterType="hashmap" resultType="int">
+		<choose>
+			<when test='searchKeyword.equals("total")'>
+				<choose>
+					<when test='searchWord.equals("")'>
+						SELECT 
+								COUNT(*) 
+						FROM 
+								`ORDER`
+					</when>
+					<otherwise>
+						SELECT 
+								COUNT(*) 
+						FROM 
+								`ORDER`
+						WHERE
+								MEMBER_ID LIKE CONCAT('%',#{searchWord},'%')
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				SELECT 
+						COUNT(*) 
+				FROM 
+						`ORDER` 
+				WHERE
+					<if test='searchKeyword.equals("memberId")'>
+						MEMBER_ID LIKE CONCAT('%' , #{searchWord} , '%')
+					</if>
+			</otherwise>
+		</choose>	
+	</select>
+	
+	
+</mapper>

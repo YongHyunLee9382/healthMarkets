@@ -20,6 +20,11 @@
        <put-attribute name="content" value="/WEB-INF/views/client/myPage/myOrderList.jsp" />
     </definition>
     
+    <definition name="/myPage/myOrderDetail" extends="default">
+       <put-attribute name="title" value="내 주문 목록" />
+       <put-attribute name="content" value="/WEB-INF/views/client/myPage/myOrderDetail.jsp" />
+    </definition>
+    
 </tiles-definitions>
 
 

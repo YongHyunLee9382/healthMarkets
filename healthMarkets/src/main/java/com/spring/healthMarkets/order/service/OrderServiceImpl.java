@@ -1,14 +1,18 @@
 package com.spring.healthMarkets.order.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.healthMarkets.contact.dto.ContactDTO;
 import com.spring.healthMarkets.goods.dto.GoodsDTO;
 import com.spring.healthMarkets.member.dto.MemberDTO;
 import com.spring.healthMarkets.order.dao.OrderDAO;
@@ -113,6 +117,16 @@ public class OrderServiceImpl implements OrderService {
 		
 	}
 	
-	
+	@Override
+	@Scheduled(cron="59 9 18 * * *")
+	public void getDailyNewOrderList() throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		List<OrderDTO> dailyNewOrderList = orderDAO.selectListDailyNewOrder(sdf.format(new Date()));
+		System.out.println("- 오늘 받은 주문 - ");
+		for (OrderDTO orderDTO : dailyNewOrderList) {
+			System.out.println(orderDTO);
+		}
+		
+	}
 	
 }

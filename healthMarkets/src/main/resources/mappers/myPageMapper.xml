@@ -199,4 +199,72 @@
 				    ON  O.PRODUCT_CD = G.PRODUCT_CD
 				   AND  O.MEMBER_ID = #{memberId}
 	</select>
+	
+	
+	<resultMap type="hashmap" id="myOrderDetailMap">
+		<result column="ORDER_CD" 		 	property="orderCd"/>
+		<result column="ORDER_GOODS_QTY" 	property="orderGoodsQty"/>
+		<result column="PAYMENT_AMT" 		property="paymentAmt"/>
+		<result column="ORDERER_NM"  		property="ordererNm"/>
+		<result column="ORDERER_HP" 		property="ordererHp"/>
+		<result column="RECEIVER_NM" 		property="receiverNm"/>
+		<result column="RECEIVER_HP" 		property="receiverHp"/>
+		<result column="ZIPCODE" 			property="zipcode"/>
+		<result column="ROAD_ADDRESS" 		property="roadAddress"/>
+		<result column="JIBUN_ADDRESS" 		property="jibunAddress"/>
+		<result column="NAMUJI_ADDRESS" 	property="namujiAddress"/>
+		<result column="DELIVERY_METHOD" 	property="deliveryMethod"/>
+		<result column="DELIVERY_MESSAGE" 	property="deliveryMessage"/>
+		<result column="GIFT_WRAPPING" 		property="giftWrapping"/>
+		<result column="PAY_METHOD" 		property="payMethod"/>
+		<result column="PAY_ORDERER_HP" 	property="payOrdererHp"/>
+		<result column="PAY_ORDER_TIME" 	property="payOrderTime"/>
+		<result column="CARD_COMPANY_NM" 	property="cardCompanyNm"/>
+		<result column="CARD_PAY_MONTH" 	property="cardPayMonth"/>
+		<result column="DELIVERY_STATUS" 	property="deliveryStatus"/>
+		<result column="PRODUCT_CD" 		property="productCd"/>
+		<result column="PRODUCT_NM" 		property="productNm"/>
+		<result column="PRICE" 				property="price"/>
+		<result column="DISCOUNT_RT" 		property="discountRt"/>
+		<result column="DELIVERY_PRICE" 	property="deliveryPrice"/>
+		<result column="POINT" 				property="point"/>
+	</resultMap>
+	
+  	<select id="selectOneMyOrder" parameterType="hashmap" resultMap="myOrderDetailMap">
+		SELECT
+				O.ORDER_CD		   AS ORDER_CD,
+		        O.ORDER_GOODS_QTY  AS ORDER_GOODS_QTY,
+		        O.PAYMENT_AMT 	   AS PAYMENT_AMT,
+		        O.ORDERER_NM	   AS ORDERER_NM,
+		        O.ORDERER_HP 	   AS ORDERER_HP,
+		        O.RECEIVER_NM 	   AS RECEIVER_NM,
+		        O.RECEIVER_HP 	   AS RECEIVER_HP,
+		        O.ZIPCODE 		   AS ZIPCODE,
+		        O.ROAD_ADDRESS     AS ROAD_ADDRESS,
+		        O.JIBUN_ADDRESS    AS JIBUN_ADDRESS,
+		        O.NAMUJI_ADDRESS   AS NAMUJI_ADDRESS,
+		        O.DELIVERY_METHOD  AS DELIVERY_METHOD,
+		        O.DELIVERY_MESSAGE AS DELIVERY_MESSAGE,
+		        O.GIFT_WRAPPING    AS GIFT_WRAPPING,
+		        O.PAY_METHOD 	   AS PAY_METHOD,
+		        O.PAY_ORDERER_HP   AS PAY_ORDERER_HP,
+		        O.PAY_ORDER_TIME   AS PAY_ORDER_TIME,
+		        O.CARD_COMPANY_NM  AS CARD_COMPANY_NM,
+		        O.CARD_PAY_MONTH   AS CARD_PAY_MONTH,
+		        O.DELIVERY_STATUS  AS DELIVERY_STATUS,
+		        G.PRODUCT_CD 	   AS PRODUCT_CD,
+		        G.PRODUCT_NM 	   AS PRODUCT_NM,
+		        G.PRICE 		   AS PRICE,
+		        G.DISCOUNT_RT      AS DISCOUNT_RT,
+		        G.DELIVERY_PRICE   AS DELIVERY_PRICE,
+		        G.POINT 		   AS POINT
+		FROM
+				`ORDER` O
+			JOIN MEMBER M
+					 ON M.MEMBER_ID = O.MEMBER_ID
+					AND M.MEMBER_ID = #{memberId}
+		     JOIN GOODS G
+					 ON G.PRODUCT_CD = O.PRODUCT_CD
+					AND O.ORDER_CD = #{orderCd}
+	</select>
 </mapper>	

@@ -3,7 +3,7 @@ package com.spring.healthMarkets.order.dao;
 import java.util.List;
 import java.util.Map;
 
-
+import com.spring.healthMarkets.contact.dto.ContactDTO;
 import com.spring.healthMarkets.goods.dto.GoodsDTO;
 import com.spring.healthMarkets.member.dto.MemberDTO;
 import com.spring.healthMarkets.order.dto.OrderDTO;
@@ -24,5 +24,7 @@ public interface OrderDAO {
 	public void insertOrderByCart(List<OrderDTO> orderList) throws Exception;
 	
 	public void deleteCartByOrder(int[] cartCdList)  throws Exception;
+	
+	public List<OrderDTO> selectListDailyNewOrder(String today) throws Exception;
 	
 }
