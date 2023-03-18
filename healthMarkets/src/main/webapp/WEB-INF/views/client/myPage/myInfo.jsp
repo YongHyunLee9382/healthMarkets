@@ -179,6 +179,15 @@
                                     <p>나머지 주소 <span>*</span></p>
                                     <input type="text" id="namujiAddress" name="namujiAddress" value="${memberDTO.namujiAddress }">
                                 </div>
+                                
+                                <c:choose>
+                      				<c:when test="${sessionScope.role eq 'admin'}">
+                        				<p>Contact권한 <span>*</span></p>
+                                    	Yes<input type="radio" id="authorityWt" name="authorityWt" value="Y">
+                                    	No<input type="radio" id="authorityWt" name="authorityWt" value="N">
+                        			</c:when>
+                        		</c:choose>
+                                    
                             </div>
                             <div class="col-lg-12">
                                 <div class="checkout__form__checkbox" align="right">
