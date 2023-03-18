@@ -60,6 +60,9 @@
 	      <if test='namujiAddress != null and namujiAddress != ""'>
 	        NAMUJI_ADDRESS = #{namujiAddress},
 	      </if>
+	      <if test='authorityWt != null and authorityWt != ""'>
+	        AUTHORITY_WT = #{authorityWt},
+	      </if>
 	    </set>
 		WHERE 
 				MEMBER_ID = #{memberId}

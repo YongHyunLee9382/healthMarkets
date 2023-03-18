@@ -33,4 +33,10 @@ public class ContactServiceImple implements ContactService {
 		
 		return contactDAO.selectContactList(memberId);
 	}
+
+	@Override
+	public void removeContact(int[] deleteContactCdList) throws Exception {
+		contactDAO.deleteContact(deleteContactCdList);
+		
+	}
 }

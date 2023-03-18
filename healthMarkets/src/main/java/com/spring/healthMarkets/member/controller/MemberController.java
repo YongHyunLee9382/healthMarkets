@@ -69,7 +69,7 @@ public class MemberController {
 			session.setAttribute("memberId"   , memberDTO.getMemberId());
 			session.setAttribute("role"       , "client");
 			session.setAttribute("myOrderCnt" , memberService.getMyOrderCnt(memberDTO.getMemberId()));
-			//session.setAttribute("myCartCnt"  , memberService.getMyCartCnt(memberDTO.getMemberId()));
+			session.setAttribute("myCartCnt"  , memberService.getMyCartCnt(memberDTO.getMemberId()));
 			session.setMaxInactiveInterval(60 * 30);
 			
 			message  = "<script>";
@@ -171,6 +171,5 @@ public class MemberController {
 					
 		return new ResponseEntity<Object>(jsScript, responseHeaders, HttpStatus.OK);
 	}
-	
 	
 }

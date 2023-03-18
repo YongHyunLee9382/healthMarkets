@@ -33,4 +33,10 @@ public class ContactDAOImpl implements ContactDAO {
 		
 		return sqlSession.selectList("contact.selectContactList" , memberId);
 	}
+
+	@Override
+	public void deleteContact(int[] deleteContactCdList) throws Exception {
+		sqlSession.delete("contact.deleteContact" , deleteContactCdList);
+		
+	}
 }

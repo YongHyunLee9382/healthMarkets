@@ -65,4 +65,6 @@ public class MemberDAOImpl implements MemberDAO {
 	public int selectMyCartCnt(String memberId) throws Exception {
 		return sqlSession.selectOne("member.selectMyCartCnt" , memberId);
 	}
+
+	
 }
