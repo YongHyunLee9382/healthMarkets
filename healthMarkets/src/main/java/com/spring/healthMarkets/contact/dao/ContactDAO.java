@@ -6,6 +6,10 @@ import com.spring.healthMarkets.contact.dto.ContactDTO;
 
 public interface ContactDAO {
 	public void insertContact(ContactDTO contactDTO) throws Exception;
+	
 	public ContactDTO selectContactOne(int contactCd) throws Exception;
+	
 	public List<ContactDTO> selectContactList(String memberId)throws Exception;
+	
+	public void deleteContact(int[] deleteContactCdList) throws Exception;
 }

@@ -8,6 +8,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function ValidationCheck(){
+		var authorityWt = $("#authorityWt").val();
+		if(authorityWt == 'N'){
+			alert("Contact권한이 없습니다.");
+			return false;
+		}
+	}
+</script>
 </head>
 <body>
 
@@ -58,13 +67,14 @@
 						</div>
 						<div class="contact__form">
 							<h5>SEND MESSAGE</h5>
-							<form action="${contextPath }/contact/addContact" method="post">
+							<form action="${contextPath }/contact/addContact" method="post" onsubmit="return ValidationCheck()">
 								<input type="text" name="name" 	  placeholder="이름을 입력하세요."> 
 								<input type="text" name="email"   placeholder="Email을 입력하세요."> 
 								<input type="text" name="subject" placeholder="제목을 입력하세요.">
 								<textarea name="content"  placeholder="메세지를 입력하세요." ></textarea>
 								<button type="submit" class="site-btn">Send Message</button>
 								<input type="hidden" name="memberId" value="${sessionScope.memberId}" >
+								<input type="hidden" name="authorityWt"  id="authorityWt" value="${memberDTO.authorityWt}" >
 							</form>
 						</div>
 					</div>

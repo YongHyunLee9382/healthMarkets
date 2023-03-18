@@ -22,6 +22,15 @@ public class MemberDTO {
 	private String namujiAddress;
 	private int point;
 	private Date joinDt;
+	private String authorityWt;
+	
+	
+	public String getAuthorityWt() {
+		return authorityWt;
+	}
+	public void setAuthorityWt(String authorityWt) {
+		this.authorityWt = authorityWt;
+	}
 	public String getMemberId() {
 		return memberId;
 	}
@@ -112,13 +121,14 @@ public class MemberDTO {
 	public void setJoinDt(Date joinDt) {
 		this.joinDt = joinDt;
 	}
-	
 	@Override
 	public String toString() {
 		return "MemberDTO [memberId=" + memberId + ", memberNm=" + memberNm + ", passwd=" + passwd + ", sex=" + sex
 				+ ", birthDt=" + birthDt + ", hp=" + hp + ", smsstsYn=" + smsstsYn + ", email=" + email
 				+ ", emailstsYn=" + emailstsYn + ", zipcode=" + zipcode + ", roadAddress=" + roadAddress
 				+ ", jibunAddress=" + jibunAddress + ", namujiAddress=" + namujiAddress + ", point=" + point
-				+ ", joinDt=" + joinDt + "]";
+				+ ", joinDt=" + joinDt + ", authorityWt=" + authorityWt + "]";
 	}
+	
+	
 }

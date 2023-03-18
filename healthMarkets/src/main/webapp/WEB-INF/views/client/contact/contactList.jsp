@@ -22,7 +22,7 @@
 				return;
 			}
 			
-			location.href = "${contextPath}/";
+			location.href = "${contextPath}/contact/removeContact?contactCdList="+contactCdList;
 		}
 		
 	}
