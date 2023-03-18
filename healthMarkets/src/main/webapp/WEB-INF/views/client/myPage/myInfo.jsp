@@ -28,8 +28,6 @@
 			location.href = "${contextPath}/myPage/removeMember?memberId=" + $("#memberId").val();
 		}
 	}
-	
-	
 
 </script>
 </head>
@@ -183,13 +181,6 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
-	                            <c:choose>
-	                        		<c:when test="${sessionScope.role eq 'admin'}">
-	                        			<p>Contact권한 <span>*</span></p>
-                                		Yes<input type="radio" id="authorityWt" name="authorityWt" value="Y">
-                                		No<input type="radio" id="authorityWt" name="authorityWt" value="N">
-	                        		</c:when>
-	                        	</c:choose>
                                 <div class="checkout__form__checkbox" align="right">
                                	 	<button type="submit" class="site-btn"><span class="icon_pencil-edit"></span> 수정</button>
                                 </div>

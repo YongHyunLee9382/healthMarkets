@@ -94,6 +94,4 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDAO.selectMyCartCnt(memberId);
 	}
-
-	
 }

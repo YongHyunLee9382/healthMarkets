@@ -6,17 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script>
-
-	$().ready(function(){
-	
-	$("#onePageViewCnt").val("${onePageViewCnt}");
-	$("#searchKeyword").val("${searchKeyword}");
-	
-	});
-
 	function gerateMemberExcelExport() {
 		location.href = "${contextPath}/admin/member/memberExcelExport";
 	}
+	
+	$().ready(function(){
+		
+		$("#onePageViewCnt").val("${onePageViewCnt}");
+		$("#searchKeyword").val("${searchKeyword}");
+		
+	});
 	
 	function getMemberList() {
 		
@@ -28,7 +27,6 @@
 		location.href = url;
 	
 	}
-	
 </script>
 </head>
 <body>
@@ -63,19 +61,19 @@
 									<td> 
 										조회 : <span style="color:red">${allMemberCnt}</span>개
 									</td>
-									<td colspan="5" align="right" >
-										<select id="onePageViewCnt" onchange="getMemberList()" >
+									<td colspan="4" align="right" >
+										<select id="onePageViewCnt" onchange="getGoodsList()" >
 											<option value="total">전체</option>
 											<option>5</option>
 											<option>7</option>
 											<option>10</option>
-										</select> 개 씩 조회
+										</select>
 									</td>
 								</tr>
                                 <tr>
                                     <th width="10%">번호</th>
-                                    <th width="20%">회원아이디</th>
-                                    <th width="20%">회원이름</th>
+                                    <th width="30%">회원아이디</th>
+                                    <th width="25%">회원이름</th>
                                     <th width="15%">포인트</th>
                                     <th width="5%">성별</th>
                                     <th width="15%">가입일자</th>

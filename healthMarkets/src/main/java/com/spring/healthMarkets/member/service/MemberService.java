@@ -18,5 +18,4 @@ public interface MemberService {
 	public int getMyOrderCnt(String memberId) throws Exception;
 	
 	public int getMyCartCnt(String memberId) throws Exception;
-	
 }

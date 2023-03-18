@@ -6,6 +6,10 @@ import java.util.Map;
 import com.spring.healthMarkets.contact.dto.ContactDTO;
 
 
+
+
+
+
 public interface AdminContactService {
 	public List<ContactDTO> getContactList() throws Exception;
 	
