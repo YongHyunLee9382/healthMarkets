@@ -218,7 +218,7 @@
                                     <input type="text" name="hp" placeholder="-를 포함해서 입력하세요.">
                                     <div class="checkout__order__widget">
 	                                    <label for="smsstsYn">
-	                                        BMS에서 발송하는 SMS 소식을 수신합니다.
+	                                        HMMS에서 발송하는 SMS 소식을 수신합니다.
 	                                        <input type="checkbox" id="smsstsYn" name="smsstsYn" value="Y">
 	                                        <span class="checkmark"></span>
 	                                    </label>
@@ -231,7 +231,7 @@
                                     <input type="text" name="email" placeholder="이메일을 입력하세요.">
                                     <div class="checkout__order__widget">
                                     <label for="emailstsYn">
-                                        BMS에서 발송하는 E-mail을 수신합니다.
+                                        HMMS에서 발송하는 E-mail을 수신합니다.
                                         <input type="checkbox" id="emailstsYn" name="emailstsYn" value="Y">
                                         <span class="checkmark"></span>
                                     </label>
