@@ -62,7 +62,7 @@
 										조회 : <span style="color:red">${allMemberCnt}</span>개
 									</td>
 									<td colspan="4" align="right" >
-										<select id="onePageViewCnt" onchange="getGoodsList()" >
+										<select id="onePageViewCnt" onchange="getMemberList()" >
 											<option value="total">전체</option>
 											<option>5</option>
 											<option>7</option>
